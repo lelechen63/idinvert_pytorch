@@ -59,8 +59,8 @@ def load_data():
     gt_imgs = []
     f = open('/home/cxu-serve/p1/lchen63/nerf/data/mead/001/img_list.txt','w')
     for i in range(len(img_names)):
-        if i == 4:
-            break
+        # if i == 4:
+        #     break
         img_p = os.path.join( img_path, img_names[i])
         f.write(img_p +'\n')       
     f.close
