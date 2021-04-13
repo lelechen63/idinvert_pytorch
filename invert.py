@@ -48,6 +48,32 @@ def parse_args():
   return parser.parse_args()
 
 
+
+
+def load_data():
+    """ load the video data"""
+    img_path = '/home/cxu-serve/p1/lchen63/nerf/data/mead/001/original'
+    img_names = os.listdir(img_path)
+    img_names.sort()
+    gt_imgs = []
+    f = open('/home/cxu-serve/p1/lchen63/nerf/data/mead/001/img_list.txt','w')
+    for i in range(len(img_names)):
+        if i == 4:
+            break
+        img_p = os.path.join( img_path, img_names[i])
+        # align_face(img_p)
+        aligned_img = cv2.imread(img_p.replace( 'original', 'aligned'))
+        f.write(img_p.replace( 'original', 'aligned') +'/n')
+        aligned_img = cv2.cvtColor(aligned_img, cv2.COLOR_RGB2BGR)
+        # print (aligned_img.shape)
+        gt_imgs.append(preprocess(aligned_img))
+    gt_imgs = np.asarray(gt_imgs)
+    gt_imgs = torch.FloatTensor(gt_imgs)
+    f.close
+    return gt_imgs
+
+
+
 def main():
   """Main function."""
   args = parse_args()
@@ -111,4 +137,5 @@ def main():
 
 
 if __name__ == '__main__':
+  load_data()
   main()
