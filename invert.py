@@ -11,6 +11,7 @@ import os
 import argparse
 from tqdm import tqdm
 import numpy as np
+import cv2
 
 from utils.inverter import StyleGANInverter
 from utils.logger import setup_logger
