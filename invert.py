@@ -62,7 +62,7 @@ def load_data():
         if i == 4:
             break
         img_p = os.path.join( img_path, img_names[i])
-        f.write(img_p +'/n')       
+        f.write(img_p +'\n')       
     f.close
     return gt_imgs
 
