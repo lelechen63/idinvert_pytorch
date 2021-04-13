@@ -94,7 +94,7 @@ def main():
   with open(args.image_list, 'r') as f:
     for line in f:
       image_list.append(line.strip())
-
+  print (image_list)
   # Initialize visualizer.
   save_interval = args.num_iterations // args.num_results
   headers = ['Name', 'Original Image', 'Encoder Output']
