@@ -53,7 +53,7 @@ def parse_args():
 
 def load_data():
     """ load the video data"""
-    img_path = '/home/cxu-serve/p1/lchen63/nerf/data/mead/001/original'
+    img_path = '/home/cxu-serve/p1/lchen63/nerf/data/mead/001/aligned'
     img_names = os.listdir(img_path)
     img_names.sort()
     gt_imgs = []
@@ -62,14 +62,7 @@ def load_data():
         if i == 4:
             break
         img_p = os.path.join( img_path, img_names[i])
-        # align_face(img_p)
-        aligned_img = cv2.imread(img_p.replace( 'original', 'aligned'))
-        f.write(img_p.replace( 'original', 'aligned') +'/n')
-        aligned_img = cv2.cvtColor(aligned_img, cv2.COLOR_RGB2BGR)
-        # print (aligned_img.shape)
-        gt_imgs.append(preprocess(aligned_img))
-    gt_imgs = np.asarray(gt_imgs)
-    gt_imgs = torch.FloatTensor(gt_imgs)
+        f.write(img_p +'/n')       
     f.close
     return gt_imgs
 
