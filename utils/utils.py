@@ -11,8 +11,8 @@ import numpy as np
 
 
 # download model from: http://dlib.net/files/shape_predictor_68_face_landmarks.dat.bz2
-predictor = dlib.shape_predictor('/u/lchen63/github/genforce/utils/shape_predictor_68_face_landmarks.dat')
-
+# predictor = dlib.shape_predictor('/u/lchen63/github/genforce/utils/shape_predictor_68_face_landmarks.dat')
+predictor = dlib.shape_predictor('/raid/celong/lele/github/idinvert_pytorch/utils/shape_predictor_68_face_landmarks.dat')
 def get_landmark(filepath):
     """get landmark with dlib
     :return: np.array shape=(68, 2)
