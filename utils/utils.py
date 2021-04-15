@@ -40,7 +40,7 @@ def get_landmark(filepath):
     return lm
 
     
-def align_face(filepath):  
+def align_face(filepath, output_path):  
     """
     transfer image to image aligned with ffhq dataset.
     :param filepath: str
@@ -123,7 +123,7 @@ def align_face(filepath):
         img = img.resize((output_size, output_size), PIL.Image.ANTIALIAS)
 
     # Save aligned image.
-    img.save(filepath.replace( 'original', 'aligned'))
+    img.save(output_path  )
     # return img
 
 def trans_video_to_imgs( video_path, save_img_folder, write_img = False ):
@@ -150,5 +150,72 @@ def trans_video_to_imgs( video_path, save_img_folder, write_img = False ):
 
     return frm_num
 
+def main_mead_video2imgs():
+    base_p = '/home/cxu-serve/p1/lchen63/nerf/data/mead/video'
+    for view_p in os.listdir(base_p):
+        current_p = os.path.join( base_p , view_p)
+        for motion_p in os.listdir(current_p):
+            current_p1 = os.path.join( current_p , motion_p)
+            for level_p in os.listdir(current_p1):
+                current_p2 = os.path.join( current_p1 , level_p)
+                for v_id in os.listdir(current_p2):
+                    if v_id[-4:] =='.mp4':
+                        v_p =  os.path.join( current_p2 , v_id)
+                        if not os.path.exists(v_p[:-4]):
+                            os.mkdir( v_p[:-4] )
+                        trans_video_to_imgs( v_p, v_p[:-4] , write_img = True )
+
+def main_facescape_video2imgs():
+    base_p = '/raid/celong/FaceScape/fsmview_images'
+    if not os.path.exists( base_p.replace('fsmview_images', 'ffhq_aligned_img') ):
+        os.mkdir(base_p.replace('fsmview_images', 'ffhq_aligned_img'))
+    save_p = base_p.replace('fsmview_images', 'ffhq_aligned_img')
+    for id_p in os.listdir(base_p):
+        current_p = os.path.join( base_p , id_p)
+        save_p1 = os.path.join( save_p , id_p)
+        if not os.path.exists(  os.path.join( save_p1 ) ):
+            os.mkdir( save_p1 ) 
+        for motion_p in os.listdir(current_p):
+            current_p1 = os.path.join( current_p , motion_p)
+            save_p2 = os.path.join( save_p1 , motion_p)
+
+            img_names = os.listdir(current_p1)
+            img_names.sort()
+            for i in range(len(img_names)):
+                img_p = os.path.join( current_p1, img_names[i])
+                output_p = os.path.join( save_p2 , img_names[i])
+                align_face(img_p, output_p)
+                print (output_p)
+            #     aligned_img = cv2.imread(img_p.replace( 'original', 'aligned'))
+            #     aligned_img = cv2.cvtColor(aligned_img, cv2.COLOR_RGB2BGR)
+            #     gt_imgs.append(preprocess(aligned_img))
+            # gt_imgs = np.asarray(gt_imgs)
+            # gt_imgs = torch.FloatTensor(gt_imgs)
+            # return gt_imgs
+
+
+
+
+def load_data():
+    """ load the video data"""
+    img_path = '/home/cxu-serve/p1/lchen63/nerf/data/mead/001/original'
+    img_names = os.listdir(img_path)
+    img_names.sort()
+    gt_imgs = []
+    for i in range(len(img_names)):
+        if i == 4:
+            break
+        img_p = os.path.join( img_path, img_names[i])
+        # align_face(img_p)
+        aligned_img = cv2.imread(img_p.replace( 'original', 'aligned'))
+        aligned_img = cv2.cvtColor(aligned_img, cv2.COLOR_RGB2BGR)
+        # print (aligned_img.shape)
+        gt_imgs.append(preprocess(aligned_img))
+    gt_imgs = np.asarray(gt_imgs)
+    gt_imgs = torch.FloatTensor(gt_imgs)
+    return gt_imgs
+
+    
+main_facescape_video2imgs()
 
 # trans_video_to_imgs( '/home/cxu-serve/p1/lchen63/nerf/data/mead/001.mp4', '/home/cxu-serve/p1/lchen63/nerf/data/mead/001/original', write_img = True )
