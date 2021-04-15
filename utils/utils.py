@@ -178,7 +178,8 @@ def main_facescape_video2imgs():
         for motion_p in os.listdir(current_p):
             current_p1 = os.path.join( current_p , motion_p)
             save_p2 = os.path.join( save_p1 , motion_p)
-
+            if not os.path.exists(  os.path.join( save_p2 ) ):
+                os.mkdir( save_p2 ) 
             img_names = os.listdir(current_p1)
             img_names.sort()
             for i in range(len(img_names)):
