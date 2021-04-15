@@ -185,8 +185,11 @@ def main_facescape_video2imgs():
             for i in range(len(img_names)):
                 img_p = os.path.join( current_p1, img_names[i])
                 output_p = os.path.join( save_p2 , img_names[i])
-                align_face(img_p, output_p)
-                print (output_p)
+                try:
+                    align_face(img_p, output_p)
+                    print (output_p)
+                except:
+                    continue
             #     aligned_img = cv2.imread(img_p.replace( 'original', 'aligned'))
             #     aligned_img = cv2.cvtColor(aligned_img, cv2.COLOR_RGB2BGR)
             #     gt_imgs.append(preprocess(aligned_img))
