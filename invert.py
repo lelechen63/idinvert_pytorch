@@ -89,7 +89,7 @@ def main_load_data():
     return  os.path.join(img_path, 'img_list.txt')
 
 
-def main(img_list = None):
+def main(image_list = None):
   """Main function."""
   args = parse_args()
   os.environ["CUDA_VISIBLE_DEVICES"] = args.gpu_id
