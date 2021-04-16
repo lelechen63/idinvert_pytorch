@@ -23,12 +23,12 @@ def parse_args():
   """Parses arguments."""
   parser = argparse.ArgumentParser()
   parser.add_argument('model_name', type=str, help='Name of the GAN model.')
-  parser.add_argument('image_list', type=str,
-                      help='List of images to invert.')
-  parser.add_argument('-o', '--output_dir', type=str, default='',
-                      help='Directory to save the results. If not specified, '
-                           '`./results/inversion/${IMAGE_LIST}` '
-                           'will be used by default.')
+  # parser.add_argument('image_list', type=str,
+  #                     help='List of images to invert.')
+  # parser.add_argument('-o', '--output_dir', type=str, default='',
+  #                     help='Directory to save the results. If not specified, '
+  #                          '`./results/inversion/${IMAGE_LIST}` '
+  #                          'will be used by default.')
   parser.add_argument('--learning_rate', type=float, default=0.01,
                       help='Learning rate for optimization. (default: 0.01)')
   parser.add_argument('--num_iterations', type=int, default=100,
