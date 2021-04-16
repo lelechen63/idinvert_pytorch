@@ -126,7 +126,7 @@ def align_face(filepath, output_path):
     img.save(output_path  )
     # return img
 
-def trans_video_to_imgs( video_path, save_img_folder, write_img = False ):
+def trans_video_to_imgs( video_path, save_img_folder, write_img = True ):
     video_cap = cv2.VideoCapture(video_path)
     if video_cap.isOpened() == False:
         print('Error in opening ' + video_path)
@@ -222,6 +222,6 @@ def load_data():
     return gt_imgs
 
     
-main_facescape_video2imgs()
-
+# main_facescape_video2imgs()
+trans_video_to_imgs( '/raid/celong/mead/tmp/001.mp4', '/raid/celong/mead/tmp/001, write_img = True )
 # trans_video_to_imgs( '/home/cxu-serve/p1/lchen63/nerf/data/mead/001.mp4', '/home/cxu-serve/p1/lchen63/nerf/data/mead/001/original', write_img = True )
