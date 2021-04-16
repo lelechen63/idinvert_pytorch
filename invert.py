@@ -153,5 +153,5 @@ def main():
 
 
 if __name__ == '__main__':
-  load_data()
+  main_load_data()
   # main()
