@@ -137,7 +137,7 @@ def main(image_list = None):
   for img_idx in tqdm(range(len(img_list)), leave=False):
     image_path = img_list[img_idx]
     image_name = image_path.split('/')[-3] +'__' + image_path.split('/')[-2] + '__' +image_path.split('/')[-1][:-4]
-    if os.path.exists (image_path.replace('jpg', 'npy'):
+    if  os.path.exists (image_path.replace('jpg', 'npy')):
       continue
     try:
       image = resize_image(load_image(image_path), (image_size, image_size))
