@@ -86,7 +86,7 @@ def main_load_data():
         img_p = os.path.join( img_path, img_names[i])
         f.write(img_p +'\n')       
     f.close
-  return  os.path.join(img_path, 'img_list.txt')
+    return  os.path.join(img_path, 'img_list.txt')
 
 
 def main(img_list = None):
