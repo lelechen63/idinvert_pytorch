@@ -119,7 +119,6 @@ def main(image_list = None):
   with open(image_list, 'r') as f:
     for line in f:
       img_list.append(line.strip())
-  print (img_list)
   # Initialize visualizer.
   save_interval = args.num_iterations // args.num_results
   headers = ['Name', 'Original Image', 'Encoder Output']
@@ -138,6 +137,7 @@ def main(image_list = None):
     image_path = img_list[img_idx]
     image_name = image_path.split('/')[-3] +'__' + image_path.split('/')[-2] + '__' +image_path.split('/')[-1][:-4]
     if  os.path.exists (image_path.replace('jpg', 'npy')):
+      print ('!!!')
       continue
     try:
       image = resize_image(load_image(image_path), (image_size, image_size))
