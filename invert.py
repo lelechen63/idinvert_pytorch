@@ -115,11 +115,11 @@ def main(image_list = None):
 
   # Load image list.
   logger.info(f'Loading image list.')
-  image_list = []
-  with open(args.image_list, 'r') as f:
+  img_list = []
+  with open(image_list, 'r') as f:
     for line in f:
-      image_list.append(line.strip())
-  print (image_list)
+      img_list.append(line.strip())
+  print (img_list)
   # Initialize visualizer.
   save_interval = args.num_iterations // args.num_results
   headers = ['Name', 'Original Image', 'Encoder Output']
@@ -128,14 +128,14 @@ def main(image_list = None):
       headers.append(f'Step {step:06d}')
   viz_size = None if args.viz_size == 0 else args.viz_size
   visualizer = HtmlPageVisualizer(
-      num_rows=len(image_list), num_cols=len(headers), viz_size=viz_size)
+      num_rows=len(img_list), num_cols=len(headers), viz_size=viz_size)
   visualizer.set_headers(headers)
 
   # Invert images.
   logger.info(f'Start inversion.')
   latent_codes = []
-  for img_idx in tqdm(range(len(image_list)), leave=False):
-    image_path = image_list[img_idx]
+  for img_idx in tqdm(range(len(img_list)), leave=False):
+    image_path = img_list[img_idx]
     image_name = image_path.split('/')[-3] +'__' + image_path.split('/')[-2] + '__' +image_path.split('/')[-1][:-4]
     
     # os.path.splitext(os.path.basename(image_path))[0]
@@ -153,7 +153,7 @@ def main(image_list = None):
       visualizer.set_cell(img_idx, viz_idx + 2, image=viz_img)
 
   # Save results.
-  os.system(f'cp {args.image_list} {output_dir}/image_list.txt')
+  # os.system(f'cp {args.image_list} {output_dir}/image_list.txt')
   visualizer.save(f'{output_dir}/inversion.html')
 
 
