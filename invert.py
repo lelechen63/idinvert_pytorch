@@ -69,24 +69,27 @@ def load_data():
 
 def main_load_data():
     """ load the video data"""
-    img_path = '/raid/celong/FaceScape/ffhq_aligned_img'
-    person_id = '140'
+    # img_path = '/raid/celong/FaceScape/ffhq_aligned_img'
+    # person_id = '140'
+    img_path = '/raid/celong/mead/tmp'
+    person_id = '001'
     img_path = os.path.join(img_path, person_id)
     img_names = []
     for root, dirs, files in os.walk(img_path):
-      for filename in files:
-        img_p = os.path.join(root, filename)
-        print(filename)
-        print (img_p)
-        img_names.append(img_p)
+      for filenamin files:
+        if filename[-3:] == 'png'  or  filename[-3:] == 'jpg': 
+          img_p = os.path.join(root, filename)
+          print(filename)
+          print (img_p)
+          img_names.append(img_p)
 
     img_names.sort()
-    f = open( os.path.join(img_path, 'img_list.txt'),'w')
+    f = open( os.path.join(img_path, 'img_list2.txt'),'w')
     for i in range(len(img_names)):
         img_p = os.path.join( img_path, img_names[i])
         f.write(img_p +'\n')       
     f.close
-    return  os.path.join(img_path, 'img_list.txt')
+    return  os.path.join(img_path, 'img_list2.txt')
 
 
 def main(image_list = None):

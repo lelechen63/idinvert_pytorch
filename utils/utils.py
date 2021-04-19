@@ -165,7 +165,7 @@ def main_mead_video2imgs():
                             os.mkdir( v_p[:-4] )
                         trans_video_to_imgs( v_p, v_p[:-4] , write_img = True )
 
-def main_facescape_video2imgs():
+def main_facescape_align():
     base_p = '/raid/celong/FaceScape/fsmview_images'
     if not os.path.exists( base_p.replace('fsmview_images', 'ffhq_aligned_img') ):
         os.mkdir(base_p.replace('fsmview_images', 'ffhq_aligned_img'))
@@ -223,5 +223,5 @@ def load_data():
 
     
 # main_facescape_video2imgs()
-trans_video_to_imgs( '/raid/celong/mead/tmp/001.mp4', '/raid/celong/mead/tmp/001', write_img = True )
+# trans_video_to_imgs( '/raid/celong/mead/tmp/001.mp4', '/raid/celong/mead/tmp/001', write_img = True )
 # trans_video_to_imgs( '/home/cxu-serve/p1/lchen63/nerf/data/mead/001.mp4', '/home/cxu-serve/p1/lchen63/nerf/data/mead/001/original', write_img = True )
