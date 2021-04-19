@@ -40,15 +40,16 @@ def get_landmark(filepath):
     return lm
 
     
-def align_face(filepath, output_path):  
+def align_face(filepath, output_path, landmark_path = None ):  
     """
     transfer image to image aligned with ffhq dataset.
     :param filepath: str
     :return: PIL Image
     """
-
-    lm = get_landmark(filepath)
-    
+    if landmark_path is None:
+        lm = get_landmark(filepath)
+    else:
+        lm = np.load(filename)
     lm_chin          = lm[0  : 17]  # left-right
     lm_eyebrow_left  = lm[17 : 22]  # left-right
     lm_eyebrow_right = lm[22 : 27]  # left-right
@@ -187,10 +188,11 @@ def main_facescape_align():
             for i in range(len(img_names)):
                 img_p = os.path.join( current_p1, img_names[i])
                 output_p = os.path.join( save_p2 , img_names[i])
+                lmark_p = img_p.replace('fsmview_images', 'fsview_landmarks')[:-3] +'npy'
                 if os.path.exists(output_p):
                     continue
                 try:
-                    align_face(img_p, output_p)
+                    align_face(img_p, output_p, lmark_p)
                     print (output_p)
                 except:
                     continue
@@ -224,6 +226,6 @@ def load_data():
     return gt_imgs
 
     
-# main_facescape_video2imgs()
-trans_video_to_imgs( '/raid/celong/mead/tmp/001.mp4', '/raid/celong/mead/tmp/001', write_img = True )
+main_facescape_align()
+# trans_video_to_imgs( '/raid/celong/mead/tmp/001.mp4', '/raid/celong/mead/tmp/001', write_img = True )
 # trans_video_to_imgs( '/home/cxu-serve/p1/lchen63/nerf/data/mead/001.mp4', '/home/cxu-serve/p1/lchen63/nerf/data/mead/001/original', write_img = True )

@@ -33,7 +33,7 @@ def parse_args():
                       help='Learning rate for optimization. (default: 0.01)')
   parser.add_argument('--num_iterations', type=int, default=100,
                       help='Number of optimization iterations. (default: 100)')
-  parser.add_argument('--num_results', type=int, default=5,
+  parser.add_argument('--num_results', type=int, default=3,
                       help='Number of intermediate optimization results to '
                            'save for each sample. (default: 5)')
   parser.add_argument('--loss_weight_feat', type=float, default=5e-5,
