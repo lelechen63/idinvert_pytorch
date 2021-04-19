@@ -76,7 +76,7 @@ def main_load_data():
     img_path = os.path.join(img_path, person_id)
     img_names = []
     for root, dirs, files in os.walk(img_path):
-      for filenamin files:
+      for filename in files:
         if filename[-3:] == 'png'  or  filename[-3:] == 'jpg': 
           img_p = os.path.join(root, filename)
           print(filename)
