@@ -51,6 +51,11 @@ def align_face(filepath, output_path, landmark_path = None ):
     else:
         lm = np.load(landmark_path)
         lm = np.transpose(lm, (1, 0))
+    lm = np.load(landmark_path)
+    lm = np.transpose(lm, (1, 0))
+    print (lm[0],'+++')
+    lm = get_landmark(filepath)
+    print (lm[0].'===')
     print (lm.shape)
     lm_chin          = lm[0  : 17]  # left-right
     lm_eyebrow_left  = lm[17 : 22]  # left-right
