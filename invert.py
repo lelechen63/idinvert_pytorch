@@ -76,7 +76,7 @@ def main_load_data():
     img_path = os.path.join(img_path, person_id)
     img_names = []
     for root, dirs, files in os.walk(img_path):
-      for filename in files:
+      for filename in  files:
         if filename[-3:] == 'png'  or  filename[-3:] == 'jpg': 
           img_p = os.path.join(root, filename)
           print(filename)
@@ -140,6 +140,7 @@ def main(image_list = None):
     image_path = img_list[img_idx]
     image_name = image_path.split('/')[-3] +'__' + image_path.split('/')[-2] + '__' +image_path.split('/')[-1][:-4]
     if  os.path.exists (image_path.replace('jpg', 'npy')):
+      print (image_path.replace('jpg', 'npy'))
       print ('!!!')
       continue
     try:
