@@ -195,6 +195,7 @@ def main_facescape_align():
                     align_face(img_p, output_p, lmark_p)
                     print (output_p)
                 except:
+                    print (img_p , lmark_p)
                     continue
             #     aligned_img = cv2.imread(img_p.replace( 'original', 'aligned'))
             #     aligned_img = cv2.cvtColor(aligned_img, cv2.COLOR_RGB2BGR)
