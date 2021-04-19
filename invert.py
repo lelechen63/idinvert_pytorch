@@ -150,7 +150,6 @@ def main(image_list = None):
       image = resize_image(load_image(image_path), (image_size, image_size))
       code, viz_results = inverter.easy_invert(image, num_viz=args.num_results)
       latent_codes.append(code)
-      print (code.shape)
       np.save(image_path[:-3] +  'npy',code)
       save_image(f'{output_dir}/{image_name}__ori.png', image)
       save_image(f'{output_dir}/{image_name}__enc.png', viz_results[1])
