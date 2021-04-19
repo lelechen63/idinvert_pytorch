@@ -191,12 +191,12 @@ def main_facescape_align():
                 lmark_p = img_p.replace('fsmview_images', 'fsmview_landmarks')[:-3] +'npy'
                 if os.path.exists(output_p):
                     continue
-                try:
+                # try:
                     align_face(img_p, output_p, lmark_p)
                     print (output_p)
-                except:
-                    print (img_p , lmark_p)
-                    continue
+                # except:
+                #     print (img_p , lmark_p)
+                #     continue
             #     aligned_img = cv2.imread(img_p.replace( 'original', 'aligned'))
             #     aligned_img = cv2.cvtColor(aligned_img, cv2.COLOR_RGB2BGR)
             #     gt_imgs.append(preprocess(aligned_img))
