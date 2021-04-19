@@ -195,8 +195,8 @@ def main_facescape_align():
                 img_p = os.path.join( current_p1, img_names[i])
                 output_p = os.path.join( save_p2 , img_names[i])
                 lmark_p = img_p.replace('fsmview_images', 'fsmview_landmarks')[:-3] +'npy'
-                if os.path.exists(output_p):
-                    continue
+                # if os.path.exists(output_p):
+                #     continue
                 try:
                     align_face(img_p, output_p, lmark_p)
                     print (output_p)
