@@ -78,7 +78,7 @@ def main_load_data():
     for root, dirs, files in os.walk(img_path):
       for filename in  files:
         if filename[-3:] == 'png'  or  filename[-3:] == 'jpg':
-          if filename.splitext('.')[0] == '1':
+          if filename.split('.')[0] == '1':
             img_p = os.path.join(root, filename)
             print(filename)
             print (img_p)
