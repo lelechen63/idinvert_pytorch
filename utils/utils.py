@@ -51,9 +51,7 @@ def align_face(filepath, output_path, landmark_path = None ):
     else:
         lm = np.load(landmark_path)
         lm = np.transpose(lm, (1, 0))
-    lm = np.load(landmark_path)
-    lm = np.transpose(lm, (1, 0))
-    lm = np.flip(lm, (0, 1))
+    lm = np.load(landmark_path).transpose(1,0)
     # print (lm,'+++')
     # lm = get_landmark(filepath)
     # print (lm,'===')
