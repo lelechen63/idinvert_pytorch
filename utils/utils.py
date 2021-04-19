@@ -28,6 +28,7 @@ def get_landmark(filepath):
             k, d.left(), d.top(), d.right(), d.bottom()))
         # Get the landmarks/parts for the face in box d.
         shape = predictor(img, d)
+        print (shape.shape)
         print("Part 0: {}, Part 1: {} ...".format(shape.part(0), shape.part(1)))
 
 
@@ -53,9 +54,9 @@ def align_face(filepath, output_path, landmark_path = None ):
         lm = np.transpose(lm, (1, 0))
     lm = np.load(landmark_path)
     lm = np.transpose(lm, (1, 0))
-    print (lm[0],'+++')
+    print (lm,'+++')
     lm = get_landmark(filepath)
-    print (lm[0],'===')
+    print (lm,'===')
     print (lm.shape)
     lm_chin          = lm[0  : 17]  # left-right
     lm_eyebrow_left  = lm[17 : 22]  # left-right
