@@ -77,19 +77,20 @@ def main_load_data():
     img_names = []
     for root, dirs, files in os.walk(img_path):
       for filename in  files:
-        if filename[-3:] == 'png'  or  filename[-3:] == 'jpg': 
-          img_p = os.path.join(root, filename)
-          print(filename)
-          print (img_p)
-          img_names.append(img_p)
+        if filename[-3:] == 'png'  or  filename[-3:] == 'jpg':
+          if filename.splitext('.')[0] == '1':
+            img_p = os.path.join(root, filename)
+            print(filename)
+            print (img_p)
+            img_names.append(img_p)
 
     img_names.sort()
     f = open( os.path.join(img_path, 'img_list2.txt'),'w')
     for i in range(len(img_names)):
         img_p = os.path.join( img_path, img_names[i])
         f.write(img_p +'\n')
-        if i == 5:
-          break   
+        # if i == 5:
+        #   break   
     f.close
     return  os.path.join(img_path, 'img_list2.txt')
 
