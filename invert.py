@@ -87,7 +87,9 @@ def main_load_data():
     f = open( os.path.join(img_path, 'img_list2.txt'),'w')
     for i in range(len(img_names)):
         img_p = os.path.join( img_path, img_names[i])
-        f.write(img_p +'\n')       
+        f.write(img_p +'\n')
+        if i == 5:
+          break   
     f.close
     return  os.path.join(img_path, 'img_list2.txt')
 
