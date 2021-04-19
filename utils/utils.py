@@ -143,6 +143,8 @@ def trans_video_to_imgs( video_path, save_img_folder, write_img = True ):
 
         cv2.imwrite(save_img_path, frm)
 
+        align_face(save_img_path, save_img_path)
+
         ret, frm = video_cap.read()
         frm_id += 1
         print(' Save frame %d/%d' % ( frm_id, frm_num ), end='\r', flush=True)
