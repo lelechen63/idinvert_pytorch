@@ -69,10 +69,10 @@ def load_data():
 
 def main_load_data():
     """ load the video data"""
-    # img_path = '/raid/celong/FaceScape/ffhq_aligned_img'
-    # person_id = '140'
-    img_path = '/raid/celong/mead/tmp'
-    person_id = '001'
+    img_path = '/raid/celong/FaceScape/ffhq_aligned_img'
+    person_id = '140'
+    # img_path = '/raid/celong/mead/tmp'
+    # person_id = '001'
     img_path = os.path.join(img_path, person_id)
     img_names = []
     for root, dirs, files in os.walk(img_path):
