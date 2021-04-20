@@ -47,6 +47,7 @@ def align_face(filepath, output_path, landmark_path = None ):
     :param filepath: str
     :return: PIL Image
     """
+    a = time.time()
     # if landmark_path is None:
     lm = get_landmark(filepath)
     # else:
@@ -106,7 +107,6 @@ def align_face(filepath, output_path, landmark_path = None ):
         img = img.crop(crop)
         quad -= crop[0:2]
 
-    d = time.time()
     # Pad.
     pad = (int(np.floor(min(quad[:,0]))), int(np.floor(min(quad[:,1]))), int(np.ceil(max(quad[:,0]))), int(np.ceil(max(quad[:,1]))))
     pad = (max(-pad[0] + border, 0), max(-pad[1] + border, 0), max(pad[2] - img.size[0] + border, 0), max(pad[3] - img.size[1] + border, 0))
@@ -137,7 +137,8 @@ def align_face(filepath, output_path, landmark_path = None ):
         img = img.resize((output_size, output_size), PIL.Image.ANTIALIAS)
    
     # Save aligned image.
-    img.save('./gg3.png'  )
+    # img.save('./gg3.png'  )
+    print (time.time() - a)
     img.save(output_path  )
     # return img
 
@@ -202,16 +203,16 @@ def main_facescape_align():
             for i in range(len(img_names)):
                 img_p = os.path.join( current_p1, img_names[i])
                 output_p = os.path.join( save_p2 , img_names[i])
-                lmark_p = img_p.replace('fsmview_images', 'fsmview_landmarks')[:-3] +'npy'
+                # lmark_p = img_p.replace('fsmview_images', 'fsmview_landmarks')[:-3] +'npy'
                 # if os.path.exists(output_p):
                 #     continue
                 try:
+                    align_face(img_p, output_p)
                     align_face(img_p, output_p, lmark_p)
                     print (output_p)
                 except:
                     print (img_p , lmark_p)
                     continue
-                print (gg)
             #     aligned_img = cv2.imread(img_p.replace( 'original', 'aligned'))
             #     aligned_img = cv2.cvtColor(aligned_img, cv2.COLOR_RGB2BGR)
             #     gt_imgs.append(preprocess(aligned_img))
