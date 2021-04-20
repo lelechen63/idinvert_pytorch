@@ -137,6 +137,7 @@ def align_face(filepath, output_path, landmark_path = None ):
         img = img.resize((output_size, output_size), PIL.Image.ANTIALIAS)
    
     # Save aligned image.
+    img.save('./gg3.png'  )
     img.save(output_path  )
     # return img
 
