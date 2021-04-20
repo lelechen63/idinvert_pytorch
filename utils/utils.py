@@ -48,13 +48,12 @@ def align_face(filepath, output_path, landmark_path = None ):
     :return: PIL Image
     """
     a = time.time()
-    # if landmark_path is None:
-    lm = get_landmark(filepath)
-    print (time.time() - a ,'11')
-    # else:
-    #     lm = np.load(landmark_path)
-    #     lm = np.transpose(lm, (1, 0))
-    # lm = np.load(landmark_path).transpose(1,0)[:,::-1]
+    if landmark_path is None:
+        lm = get_landmark(filepath)
+    else:
+        lm = np.load(landmark_path)
+        lm = np.transpose(lm, (1, 0))
+        lm = np.load(landmark_path).transpose(1,0)[:,::-1]
 
     lm_chin          = lm[0  : 17]  # left-right
     lm_eyebrow_left  = lm[17 : 22]  # left-right
@@ -119,14 +118,8 @@ def align_face(filepath, output_path, landmark_path = None ):
         mask = np.maximum(1.0 - np.minimum(np.float32(x) / pad[0], np.float32(w-1-x) / pad[2]), 1.0 - np.minimum(np.float32(y) / pad[1], np.float32(h-1-y) / pad[3]))
         blur = qsize * 0.02
         img = PIL.Image.fromarray(np.uint8(np.clip(np.rint(img), 0, 255)), 'RGB')
-        # img.save('./gg.png'  )
         # img += (scipy.ndimage.gaussian_filter(img, [blur, blur, 0]) - img) * np.clip(mask * 3.0 + 1.0, 0.0, 1.0)
-        # img = PIL.Image.fromarray(np.uint8(np.clip(np.rint(img), 0, 255)), 'RGB')
-        # img.save('./gg2.png'  )
-
-        # print (time.time() - d, '+++1')
         img += (np.median(img, axis=(0,1)) - img) * np.clip(mask, 0.0, 1.0)
-        # print (time.time() - d, '++2z')
         img = PIL.Image.fromarray(np.uint8(np.clip(np.rint(img), 0, 255)), 'RGB')
         quad += pad[:2]
         # print (time.time() - d)
@@ -204,12 +197,12 @@ def main_facescape_align():
             for i in range(len(img_names)):
                 img_p = os.path.join( current_p1, img_names[i])
                 output_p = os.path.join( save_p2 , img_names[i])
-                # lmark_p = img_p.replace('fsmview_images', 'fsmview_landmarks')[:-3] +'npy'
+                lmark_p = img_p.replace('fsmview_images', 'fsmview_landmarks')[:-3] +'npy'
                 # if os.path.exists(output_p):
                 #     continue
                 try:
-                    align_face(img_p, output_p)
-                    # align_face(img_p, output_p, lmark_p)
+                    # align_face(img_p, output_p)
+                    align_face(img_p, output_p, lmark_p)
                     print (output_p)
                 except:
                     continue
