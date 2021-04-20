@@ -215,6 +215,7 @@ def main_facescape_align():
                 except:
                     print (img_p , lmark_p)
                     continue
+                print (gg)
             #     aligned_img = cv2.imread(img_p.replace( 'original', 'aligned'))
             #     aligned_img = cv2.cvtColor(aligned_img, cv2.COLOR_RGB2BGR)
             #     gt_imgs.append(preprocess(aligned_img))
