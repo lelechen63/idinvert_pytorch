@@ -8,6 +8,7 @@ import scipy
 import scipy.ndimage
 import dlib
 import numpy as np
+import time 
 
 
 # download model from: http://dlib.net/files/shape_predictor_68_face_landmarks.dat.bz2
@@ -52,10 +53,8 @@ def align_face(filepath, output_path, landmark_path = None ):
         lm = np.load(landmark_path)
         lm = np.transpose(lm, (1, 0))
     lm = np.load(landmark_path).transpose(1,0)[:,::-1]
-    # print (lm,'+++')
-    # lm = get_landmark(filepath)
-    # print (lm,'===')
-    # print (lm.shape)
+    a = time.time()
+
     lm_chin          = lm[0  : 17]  # left-right
     lm_eyebrow_left  = lm[17 : 22]  # left-right
     lm_eyebrow_right = lm[22 : 27]  # left-right
@@ -84,8 +83,9 @@ def align_face(filepath, output_path, landmark_path = None ):
     c = eye_avg + eye_to_mouth * 0.1
     quad = np.stack([c - x - y, c - x + y, c + x + y, c + x - y])
     qsize = np.hypot(*x) * 2
-
-
+    
+    b = time.time()
+    print ('b -a' , b - a )
     # read image
     img = PIL.Image.open(filepath)
 
@@ -101,6 +101,9 @@ def align_face(filepath, output_path, landmark_path = None ):
         quad /= shrink
         qsize /= shrink
 
+    c = time.time()
+    print ('c -b ' , c - b )
+
     # Crop.
     border = max(int(np.rint(qsize * 0.1)), 3)
     crop = (int(np.floor(min(quad[:,0]))), int(np.floor(min(quad[:,1]))), int(np.ceil(max(quad[:,0]))), int(np.ceil(max(quad[:,1]))))
@@ -108,6 +111,10 @@ def align_face(filepath, output_path, landmark_path = None ):
     if crop[2] - crop[0] < img.size[0] or crop[3] - crop[1] < img.size[1]:
         img = img.crop(crop)
         quad -= crop[0:2]
+
+    d = time.time()
+    print ('d -c' , d - c )
+
 
     # Pad.
     pad = (int(np.floor(min(quad[:,0]))), int(np.floor(min(quad[:,1]))), int(np.ceil(max(quad[:,0]))), int(np.ceil(max(quad[:,1]))))
@@ -124,11 +131,16 @@ def align_face(filepath, output_path, landmark_path = None ):
         img = PIL.Image.fromarray(np.uint8(np.clip(np.rint(img), 0, 255)), 'RGB')
         quad += pad[:2]
 
+    e = time.time()
+    print ('e -d' ,  e - d )
+
     # Transform.
     img = img.transform((transform_size, transform_size), PIL.Image.QUAD, (quad + 0.5).flatten(), PIL.Image.BILINEAR)
     if output_size < transform_size:
         img = img.resize((output_size, output_size), PIL.Image.ANTIALIAS)
-
+   
+    f = time.time()
+    print ('f - e' ,  f - e )
     # Save aligned image.
     img.save(output_path  )
     # return img
