@@ -50,6 +50,7 @@ def align_face(filepath, output_path, landmark_path = None ):
     a = time.time()
     # if landmark_path is None:
     lm = get_landmark(filepath)
+    print (time.time() - a ,'11')
     # else:
     #     lm = np.load(landmark_path)
     #     lm = np.transpose(lm, (1, 0))
@@ -208,10 +209,9 @@ def main_facescape_align():
                 #     continue
                 try:
                     align_face(img_p, output_p)
-                    align_face(img_p, output_p, lmark_p)
+                    # align_face(img_p, output_p, lmark_p)
                     print (output_p)
                 except:
-                    print (img_p , lmark_p)
                     continue
             #     aligned_img = cv2.imread(img_p.replace( 'original', 'aligned'))
             #     aligned_img = cv2.cvtColor(aligned_img, cv2.COLOR_RGB2BGR)
