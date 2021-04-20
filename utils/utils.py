@@ -53,7 +53,6 @@ def align_face(filepath, output_path, landmark_path = None ):
         lm = np.load(landmark_path)
         lm = np.transpose(lm, (1, 0))
     lm = np.load(landmark_path).transpose(1,0)[:,::-1]
-    a = time.time()
 
     lm_chin          = lm[0  : 17]  # left-right
     lm_eyebrow_left  = lm[17 : 22]  # left-right
@@ -84,8 +83,6 @@ def align_face(filepath, output_path, landmark_path = None ):
     quad = np.stack([c - x - y, c - x + y, c + x + y, c + x - y])
     qsize = np.hypot(*x) * 2
     
-    b = time.time()
-    print ('b -a' , b - a )
     # read image
     img = PIL.Image.open(filepath)
 
@@ -101,9 +98,6 @@ def align_face(filepath, output_path, landmark_path = None ):
         quad /= shrink
         qsize /= shrink
 
-    c = time.time()
-    print ('c -b ' , c - b )
-
     # Crop.
     border = max(int(np.rint(qsize * 0.1)), 3)
     crop = (int(np.floor(min(quad[:,0]))), int(np.floor(min(quad[:,1]))), int(np.ceil(max(quad[:,0]))), int(np.ceil(max(quad[:,1]))))
@@ -113,34 +107,34 @@ def align_face(filepath, output_path, landmark_path = None ):
         quad -= crop[0:2]
 
     d = time.time()
-    print ('d -c' , d - c )
-
-
     # Pad.
     pad = (int(np.floor(min(quad[:,0]))), int(np.floor(min(quad[:,1]))), int(np.ceil(max(quad[:,0]))), int(np.ceil(max(quad[:,1]))))
     pad = (max(-pad[0] + border, 0), max(-pad[1] + border, 0), max(pad[2] - img.size[0] + border, 0), max(pad[3] - img.size[1] + border, 0))
+    print (time.time() - d)
     if enable_padding and max(pad) > border - 4:
         pad = np.maximum(pad, int(np.rint(qsize * 0.3)))
+        print (time.time() - d)
         img = np.pad(np.float32(img), ((pad[1], pad[3]), (pad[0], pad[2]), (0, 0)), 'reflect')
+        print (time.time() - d)
         h, w, _ = img.shape
         y, x, _ = np.ogrid[:h, :w, :1]
+        print (time.time() - d)
         mask = np.maximum(1.0 - np.minimum(np.float32(x) / pad[0], np.float32(w-1-x) / pad[2]), 1.0 - np.minimum(np.float32(y) / pad[1], np.float32(h-1-y) / pad[3]))
         blur = qsize * 0.02
+        print (time.time() - d)
         img += (scipy.ndimage.gaussian_filter(img, [blur, blur, 0]) - img) * np.clip(mask * 3.0 + 1.0, 0.0, 1.0)
         img += (np.median(img, axis=(0,1)) - img) * np.clip(mask, 0.0, 1.0)
+        print (time.time() - d)
         img = PIL.Image.fromarray(np.uint8(np.clip(np.rint(img), 0, 255)), 'RGB')
         quad += pad[:2]
+        print (time.time() - d)
 
-    e = time.time()
-    print ('e -d' ,  e - d )
 
     # Transform.
     img = img.transform((transform_size, transform_size), PIL.Image.QUAD, (quad + 0.5).flatten(), PIL.Image.BILINEAR)
     if output_size < transform_size:
         img = img.resize((output_size, output_size), PIL.Image.ANTIALIAS)
    
-    f = time.time()
-    print ('f - e' ,  f - e )
     # Save aligned image.
     img.save(output_path  )
     # return img
