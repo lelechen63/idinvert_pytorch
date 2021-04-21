@@ -16,6 +16,7 @@ import copy
 
 def get_lists():
     dataset_dir ='/raid/celong/FaceScape/'
+    train_list = []
     for pid in os.listdir(os.path.join(dataset_dir , "ffhq_aligned_img") ):
         print (pid)
         for exp_id in os.listdir(os.path.join(dataset_dir , "ffhq_aligned_img" , pid) ):
@@ -24,6 +25,10 @@ def get_lists():
                 img_p = os.path.join(dataset_dir , "ffhq_aligned_img" , pid, exp_id, '%d.jpg'%i)
                 if os.path.exists(img_p):
                     print (img_p)
+                    train_list.append(os.path.join( pid, exp_id, '%d.jpg'%i))
+                    
+    with open(os.path.join(dataset_dir,'lists/train.pkl'), 'wb') as handle:
+        pickle.dump(train_list, handle, protocol=pickle.HIGHEST_PROTOCOL)
 get_lists()
 
 class FaceScape(data.Dataset):
@@ -42,7 +47,7 @@ class FaceScape(data.Dataset):
     
     def __getitem__(self, index):
         if self.train=='train':
-            
+            print (self,data_list[index])
             img_path = os.path.join(self.dataset_dir , "ffhq_aligned_img", self.data_list[index]) 
 
          

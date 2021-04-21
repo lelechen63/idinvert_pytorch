@@ -1,17 +1,9 @@
-import os 
-import random
-import pickle
-import numpy as np
-import cv2
-import torch
-import torch.utils.data as data
-import torchvision.transforms as transforms
-from PIL import Image
-from torch.utils.data import DataLoader
-import librosa
-import time
-import copy
 
+
+import torch
+import torch.nn as nn
+from torch.utils.data import DataLoader
+from dataset import FaceScape
 class Code2Params(torch.nn.Module):
     def __init__(self):
         super(Code2Params, self).__init__()
@@ -34,3 +26,6 @@ class Code2Params(torch.nn.Module):
   
 
 
+def train():
+    dataset = FaceScape()
+    
