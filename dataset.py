@@ -34,6 +34,7 @@ def get_lists():
 class FaceScape(data.Dataset):
     def __init__(self,
                 dataset_dir ='/raid/celong/FaceScape/', mode = 'train'):
+        self.mode = mode
         if self.mode=='train':
             _file = open(os.path.join(dataset_dir, "lists/train.pkl"), "rb")
         elif self.mode =='test':
@@ -46,7 +47,7 @@ class FaceScape(data.Dataset):
 
     
     def __getitem__(self, index):
-        if self.train=='train':
+        if self.mode=='train':
             print (self,data_list[index])
             img_path = os.path.join(self.dataset_dir , "ffhq_aligned_img", self.data_list[index]) 
 
