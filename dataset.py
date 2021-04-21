@@ -49,7 +49,7 @@ class FaceScape(data.Dataset):
     def __getitem__(self, index):
         if self.mode=='train':
             print (self.data_list[index])
-            tmp = data_list[index].split('/')
+            tmp = self.data_list[index].split('/')
             p_id = tmp[0]
             exp_id = tmp[1]
             view_id = tmp[2]
