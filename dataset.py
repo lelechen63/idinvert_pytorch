@@ -29,7 +29,7 @@ def get_lists():
                     
     with open(os.path.join(dataset_dir,'lists/train.pkl'), 'wb') as handle:
         pickle.dump(train_list, handle, protocol=pickle.HIGHEST_PROTOCOL)
-get_lists()
+# get_lists()
 
 class FaceScape(data.Dataset):
     def __init__(self,
@@ -50,6 +50,7 @@ class FaceScape(data.Dataset):
             print (self,data_list[index])
             img_path = os.path.join(self.dataset_dir , "ffhq_aligned_img", self.data_list[index]) 
 
+            return img_path
          
     def __len__(self):
        
