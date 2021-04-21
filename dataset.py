@@ -49,8 +49,17 @@ class FaceScape(data.Dataset):
     def __getitem__(self, index):
         if self.mode=='train':
             print (self.data_list[index])
-            img_path = os.path.join(self.dataset_dir , "ffhq_aligned_img", self.data_list[index]) 
+            tmp = data_list[index].split('/')
+            p_id = tmp[0]
+            exp_id = tmp[1]
+            view_id = tmp[2]
+            img_path = os.path.join(self.dataset_dir , "ffhq_aligned_img", self.data_list[index])
+            code_path = os.path.join(self.dataset_dir , "ffhq_aligned_img", self.data_list[index][:-3] + 'npy')
 
+            img = cv2.imread(img_path)
+            print (img.shape)
+            code = np.load(code_path)
+            print (code.shape)
         return img_path
          
     def __len__(self):
