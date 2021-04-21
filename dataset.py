@@ -48,10 +48,10 @@ class FaceScape(data.Dataset):
     
     def __getitem__(self, index):
         if self.mode=='train':
-            print (self,data_list[index])
+            print (self.data_list[index])
             img_path = os.path.join(self.dataset_dir , "ffhq_aligned_img", self.data_list[index]) 
 
-            return img_path
+        return img_path
          
     def __len__(self):
        
