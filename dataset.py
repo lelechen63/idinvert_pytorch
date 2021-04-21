@@ -16,7 +16,7 @@ import copy
 
 def get_lists():
     dataset_dir ='/raid/celong/FaceScape/'
-    for pid in os.listdir(os.path.join(self.dataset_dir , "ffhq_aligned_img") ):
+    for pid in os.listdir(os.path.join(dataset_dir , "ffhq_aligned_img") ):
         print (pid)
     
 get_lists()
