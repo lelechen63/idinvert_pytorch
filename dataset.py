@@ -21,7 +21,7 @@ def get_lists():
         for exp_id in os.listdir(os.path.join(dataset_dir , "ffhq_aligned_img" , pid) ):
             print (exp_id)
             for  i in range(56):
-                img_p = os.listdir(os.path.join(dataset_dir , "ffhq_aligned_img" , pid, exp_id, '%d.jpg'.format(i)))
+                img_p = os.listdir(os.path.join(dataset_dir , "ffhq_aligned_img" , pid, exp_id, '%d.jpg'%i))
                 if os.path.exists(img_p):
                     print (img_p)
 get_lists()
