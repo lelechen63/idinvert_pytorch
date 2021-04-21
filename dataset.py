@@ -22,10 +22,12 @@ def get_lists():
         for exp_id in os.listdir(os.path.join(dataset_dir , "ffhq_aligned_img" , pid) ):
             print (exp_id)
             for  i in range(56):
-                img_p = os.path.join(dataset_dir , "ffhq_aligned_img" , pid, exp_id, '%d.npy'%i)
+                img_p = os.path.join(dataset_dir , "ffhq_aligned_img" , pid, exp_id, '%d.jpg'%i)
                 if os.path.exists(img_p):
                     print (img_p)
-                    train_list.append(os.path.join( pid, exp_id, '%d.jpg'%i))
+                    if os.path.exists(os.path.join(dataset_dir , "ffhq_aligned_img" , pid, exp_id, '1.npy')):
+
+                        train_list.append(os.path.join( pid, exp_id, '%d.jpg'%i))
                     
     with open(os.path.join(dataset_dir,'lists/train.pkl'), 'wb') as handle:
         pickle.dump(train_list, handle, protocol=pickle.HIGHEST_PROTOCOL)
@@ -54,7 +56,7 @@ class FaceScape(data.Dataset):
             exp_id = tmp[1]
             view_id = tmp[2]
             img_path = os.path.join(self.dataset_dir , "ffhq_aligned_img", self.data_list[index])
-            code_path = os.path.join(self.dataset_dir , "ffhq_aligned_img", self.data_list[index][:-3] + 'npy')
+            code_path = os.path.join(self.dataset_dir , "ffhq_aligned_img", p_id, exp_id, '1.npy')
 
             img = cv2.imread(img_path)
             print (img.shape)
