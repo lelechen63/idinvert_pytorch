@@ -31,7 +31,7 @@ def get_lists():
                     
     with open(os.path.join(dataset_dir,'lists/train.pkl'), 'wb') as handle:
         pickle.dump(train_list, handle, protocol=pickle.HIGHEST_PROTOCOL)
-# get_lists()
+get_lists()
 
 class FaceScape(data.Dataset):
     def __init__(self,
