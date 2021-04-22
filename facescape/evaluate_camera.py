@@ -11,6 +11,12 @@ if __name__ == '__main__':
 
     K = np.array(params['%d_K' % test_num])
     Rt = np.array(params['%d_Rt' % test_num])
+    h_src = params['%d_height' % test_num]
+    w_src = params['%d_width' % test_num]
+
+    # scale h and w
+    h, w = int(h_src * scale), int(w_src * scale)
+
     dist = np.array(params['%d_distortion' % test_num], dtype = np.float)
 
     # read image
@@ -37,6 +43,7 @@ if __name__ == '__main__':
     coord = pos[:2,:] / pos[2,:]
     
     coord = coord.astype(int)
+    print (coord.shape)
     coord[0, :] = np.clip(coord[0, :], 0, w_src - 1)
     coord[1, :] = np.clip(coord[1, :], 0, h_src - 1)
     coord = coord[::-1,:]
