@@ -8,7 +8,7 @@ import renderer
 def projection_test(test_num, scale=1.0):
 
     # read params
-    with open("/raid/celong/FaceScape/fsmview_trainset_images_121-140/fsmview_trainset/123/13_lip_funneler/params.json", 'r') as f:
+    with open("/raid/celong/FaceScape/fsmview_images/123/13_lip_funneler/params.json", 'r') as f:
         params = json.load(f)
 
     # extract KRt dist
@@ -23,14 +23,14 @@ def projection_test(test_num, scale=1.0):
     K[:2,:] = K[:2,:] * scale
 
     # read image
-    src_img = cv2.imread("/raid/celong/FaceScape/fsmview_trainset_images_121-140/fsmview_trainset/123/13_lip_funneler/%d.jpg" % test_num)
+    src_img = cv2.imread("/raid/celong/FaceScape/fsmview_images/123/13_lip_funneler/%d.jpg" % test_num)
     src_img = cv2.resize(src_img, (w, h))
 
     # undistort image
     undist_img = cv2.undistort(src_img, K, dist)
 
     # read and render mesh
-    mesh_dirname = "/raid/celong/FaceScape/fsmview_trainset_shape_121-140/fsmview_trainset/123/13_lip_funneler.ply"
+    mesh_dirname = "/raid/celong/FaceScape/fsmview_shapes/123/13_lip_funneler.ply"
     _, rend_img = renderer.render_cvcam(K, Rt, mesh_dirname, std_size=(h, w))
 
     # project and show
