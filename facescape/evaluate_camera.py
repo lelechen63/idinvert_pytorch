@@ -8,6 +8,7 @@ if __name__ == '__main__':
         params = json.load(f)
     
     test_num = 11
+    scale =1.0
 
     K = np.array(params['%d_K' % test_num])
     Rt = np.array(params['%d_Rt' % test_num])
