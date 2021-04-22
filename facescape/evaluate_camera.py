@@ -2,7 +2,7 @@ import json
 import numpy as np
 import trimesh
 import imageio
-
+import cv2
 if __name__ == '__main__':
     with open("/raid/celong/FaceScape/fsmview_images/123/13_lip_funneler/params.json", 'r') as f:
         params = json.load(f)
