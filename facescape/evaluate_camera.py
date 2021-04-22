@@ -20,7 +20,7 @@ if __name__ == '__main__':
     dist = np.array(params['%d_distortion' % test_num], dtype = np.float)
 
     # read image
-    src_img = cv2.imread("/raid/celong/FaceScape/fsmview_trainset_images_121-140/fsmview_trainset/123/13_lip_funneler/%d.jpg" % test_num)
+    src_img = cv2.imread("/raid/celong/FaceScape/fsmview_images/123/13_lip_funneler/%d.jpg" % test_num)
     src_img = cv2.resize(src_img, (w, h))
     # undistort image
     undist_img = cv2.undistort(src_img, K, dist)
