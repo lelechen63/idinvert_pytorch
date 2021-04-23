@@ -47,7 +47,10 @@ if __name__ == '__main__':
     print (coord.shape)
     coord[0, :] = np.clip(coord[0, :], 0, w_src - 1)
     coord[1, :] = np.clip(coord[1, :], 0, h_src - 1)
+    print (coord.shape,'1')
     coord = coord[::-1,:]
+    print (coord.shape,'2')
     img = np.zeros((h_src, w_src))
+    print (coord.shape, "!!!")
     img[tuple(coord)] = 1.0
     imageio.imsave(f"mask_{test_num}.jpg", img)
