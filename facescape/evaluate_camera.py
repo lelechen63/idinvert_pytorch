@@ -37,6 +37,9 @@ if __name__ == '__main__':
     mesh_dirname = "/raid/celong/FaceScape/fsmview_shapes/123/13_lip_funneler.ply"
     mesh = trimesh.load_mesh(mesh_dirname)
     verts = np.array(mesh.vertices)
+    print (verts.shape)
+    verts_color = np.zeros(verts.shape)
+    print (verts_color.shape)
     R = Rt[:3,:3]
     T = Rt[:3,3:]
 
