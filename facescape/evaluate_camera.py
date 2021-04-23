@@ -40,7 +40,7 @@ if __name__ == '__main__':
     print (verts.shape)
     
     verts_color = np.zeros(verts.shape)
-    colored_verts = np.concatenate(verts, verts_color,axis = 1)
+    colored_verts = np.concatenate((verts, verts_color),axis = 1)
     print (colored_verts.shape)
 
     R = Rt[:3,:3]
