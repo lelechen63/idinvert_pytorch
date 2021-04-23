@@ -55,3 +55,5 @@ if __name__ == '__main__':
     print (coord.shape, "!!!")
     img[tuple(coord)] = 1.0
     imageio.imsave(f"mask_{test_num}.jpg", img)
+
+    print (undistort.shape,'@@')
