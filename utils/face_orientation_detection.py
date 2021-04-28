@@ -117,7 +117,7 @@ if __name__ == '__main__':
         angles = []
         min_value = 10000
         for cam_idx in range(57):
-            angle_x, angle_y, angle_z = get_face_orientation(id_idx, exp_idx, cam_idx)
+            angle_x, angle_y, angle_z = get_face_orientation(int(id_idx), exp_idx, cam_idx)
             
             angles.append([angle_x, angle_y, angle_z])
         angles = np.array(angles)
