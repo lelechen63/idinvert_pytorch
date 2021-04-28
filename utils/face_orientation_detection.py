@@ -95,7 +95,7 @@ def get_face_orientation(id_idx, exp_idx, cam_idx):
     return np.arccos(x_dir.T.dot(x_c)).squeeze() * 180 / np.pi, np.arccos(y_dir.T.dot(y_c)).squeeze() * 180 / np.pi, np.arccos(z_dir.T.dot(z_c)).squeeze() * 180 / np.pi
 
 if __name__ == '__main__':
-    id_idx = 2
+    id_idx = 3
     exp_idx = 1
     cam_idx = 20
     angles = []
@@ -108,7 +108,7 @@ if __name__ == '__main__':
             min_value = angle_x * 0.5 + angle_y * 0.2 + angle_z * 0.3
             min_id = cam_idx
         print(cam_idx,'=====', angle_x, angle_y, angle_z, '---', angle_x * 0.5 + angle_y * 0.2 + angle_z * 0.3)
-    angles = numpy.array(angles)
+    angles = np.array(angles)
     print (angles.shape)
     print (min_id)
     
