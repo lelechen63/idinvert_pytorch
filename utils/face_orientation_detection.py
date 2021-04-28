@@ -98,10 +98,21 @@ if __name__ == '__main__':
     id_idx = 2
     exp_idx = 1
     cam_idx = 20
+    angles = []
+    min_value = 10000
     for cam_idx in range(57):
-
         angle_x, angle_y, angle_z = get_face_orientation(id_idx, exp_idx, cam_idx)
-        print(cam_idx,'=====', angle_x, angle_y, angle_z)
+        
+        angles.append([angle_x, angle_y, angle_z])
+        if min_value > angle_x * 0.5 + angle_y * 0.2 + angle_z * 0.3:
+            min_value = angle_x * 0.5 + angle_y * 0.2 + angle_z * 0.3
+            min_id = cam_idx
+        print(cam_idx,'=====', angle_x, angle_y, angle_z, '---', angle_x * 0.5 + angle_y * 0.2 + angle_z * 0.3)
+    angles = numpy.array(angles)
+    print (angles.shape)
+    print (min_id)
+    
+
 
     # img_dir = f"{image_data_root}/{id_idx}/{expressions[exp_idx]}"
     # img_path = f"{img_dir}/{cam_idx}.jpg"
