@@ -104,4 +104,5 @@ if __name__ == '__main__':
 
     img_dir = f"{image_data_root}/{id_idx}/{expressions[exp_idx]}"
     img_path = f"{img_dir}/{cam_idx}.jpg"
+    print (img_path)
     os.system(f"cp {img_path} tmp/")

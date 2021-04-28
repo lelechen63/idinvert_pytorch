@@ -214,8 +214,6 @@ def main_facescape_align():
             # return gt_imgs
 
 
-
-
 def load_data():
     """ load the video data"""
     img_path = '/home/cxu-serve/p1/lchen63/nerf/data/mead/001/original'
