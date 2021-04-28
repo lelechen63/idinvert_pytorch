@@ -62,4 +62,10 @@ if __name__ == '__main__':
     img[tuple(coord)] = 1.0
     imageio.imsave(f"mask_{test_num}.jpg", img)
 
+    for i in range(h_src):
+        for j in range(w_src):
+            pixel_value = undist_img[i,j]
+            
+            colored_verts[x,y,z,:] = pixel_value
+
     print (undist_img.shape,'@@')
