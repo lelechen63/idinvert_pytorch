@@ -101,6 +101,7 @@ def get_all_folder_example():
         print (img_folder)
         command = 'cp -r ' + img_folder + ' ./tmp'
         print (command)
+        os.system(command)
 
 
 
