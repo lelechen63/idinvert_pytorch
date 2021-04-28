@@ -108,7 +108,7 @@ def get_all_folder_example():
 
 
 if __name__ == '__main__':
-    get_all_folder_example()
+    # get_all_folder_example()
     id_idx = 3
     exp_idx = 1
     cam_idx = 20
