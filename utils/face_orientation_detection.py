@@ -112,7 +112,7 @@ if __name__ == '__main__':
     exp_idx = 1
     pids = os.listdir(image_data_root)
     pids.sort()
-    f =  open("./predef/Rt_scale_dict.json", 'w')
+    gg =  open("./predef/Rt_scale_dict.json", 'w')
 
     for id_idx in pids:
         if not os.path.exists( os.path.join( "/raid/celong/FaceScape/tmp" , id_idx) ):
@@ -128,7 +128,7 @@ if __name__ == '__main__':
         angle_sum = angles.sum(1)
         small_index = angle_sum.argsort()[:3]
         print (id_idx)
-        f.write(id_idx )
+        gg.write(id_idx )
         for indx in small_index:
             print (indx, angle_sum[indx])
             f.write(',' +  str(indx) )
@@ -138,7 +138,7 @@ if __name__ == '__main__':
             command = 'cp ' + img_path + ' ' + target_path
             os.system(command)
             print (img_path)
-        f.write('\n')
+        gg.write('\n')
         # break
     # img_path = f"{img_dir}/{cam_idx}.jpg"
     # print (img_path)
