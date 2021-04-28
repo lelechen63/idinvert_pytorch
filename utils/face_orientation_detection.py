@@ -94,7 +94,20 @@ def get_face_orientation(id_idx, exp_idx, cam_idx):
 
     return np.arccos(x_dir.T.dot(x_c)).squeeze() * 180 / np.pi, np.arccos(y_dir.T.dot(y_c)).squeeze() * 180 / np.pi, np.arccos(z_dir.T.dot(z_c)).squeeze() * 180 / np.pi
 
+def get_all_folder_example():
+    pids = os.listdir(image_data_root)
+    for pid in pids:
+        img_folder =  os.path.join(image_data_root, pid, '1_neutral')
+        print (img_folder)
+        command = 'cp -r ' + img_folder + ' ./tmp'
+        print (command)
+
+
+
+
+
 if __name__ == '__main__':
+    get_all_folder_example()
     id_idx = 3
     exp_idx = 1
     cam_idx = 20
