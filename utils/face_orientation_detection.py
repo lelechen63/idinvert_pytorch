@@ -112,7 +112,7 @@ if __name__ == '__main__':
     exp_idx = 1
     pids = os.listdir(image_data_root)
     pids.sort()
-    gg =  open("./predef/Rt_scale_dict.json", 'w')
+    gg =  open("./predef/frontface_list.txt", 'w')
 
     for id_idx in pids:
         if not os.path.exists( os.path.join( "/raid/celong/FaceScape/tmp" , id_idx) ):
