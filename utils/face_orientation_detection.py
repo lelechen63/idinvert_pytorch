@@ -127,7 +127,7 @@ if __name__ == '__main__':
         for indx in small_index:
             print (indx, angle_sum[indx])
     
-            img_path = f"{image_data_root}/{id_idx}/{expressions[exp_idx]}/{indx}.jpg"
+            img_path = os.path.join( image_data_root , id_idx, "1_neutral",  str(indx) + ".jpg" )
             print (img_path)
         break
     # img_path = f"{img_dir}/{cam_idx}.jpg"
