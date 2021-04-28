@@ -95,14 +95,15 @@ def get_face_orientation(id_idx, exp_idx, cam_idx):
     return np.arccos(x_dir.T.dot(x_c)).squeeze() * 180 / np.pi, np.arccos(y_dir.T.dot(y_c)).squeeze() * 180 / np.pi, np.arccos(z_dir.T.dot(z_c)).squeeze() * 180 / np.pi
 
 if __name__ == '__main__':
-    id_idx = 70
+    id_idx = 2
     exp_idx = 1
     cam_idx = 20
+    for cam_idx in range(57):
 
-    angle_x, angle_y, angle_z = get_face_orientation(id_idx, exp_idx, cam_idx)
-    print(angle_x, angle_y, angle_z)
+        angle_x, angle_y, angle_z = get_face_orientation(id_idx, exp_idx, cam_idx)
+        print(cam_idx,'=====', angle_x, angle_y, angle_z)
 
-    img_dir = f"{image_data_root}/{id_idx}/{expressions[exp_idx]}"
-    img_path = f"{img_dir}/{cam_idx}.jpg"
-    print (img_path)
-    os.system(f"cp {img_path} tmp/")
+    # img_dir = f"{image_data_root}/{id_idx}/{expressions[exp_idx]}"
+    # img_path = f"{img_dir}/{cam_idx}.jpg"
+    # print (img_path)
+    # os.system(f"cp {img_path} tmp/")
