@@ -131,7 +131,7 @@ if __name__ == '__main__':
         gg.write(id_idx )
         for indx in small_index:
             print (indx, angle_sum[indx])
-            f.write(',' +  str(indx) )
+            gg.write(',' +  str(indx) )
             img_path = os.path.join( image_data_root , id_idx, "1_neutral",  str(indx) + ".jpg" )
             target_path =  os.path.join( "/raid/celong/FaceScape/tmp" , id_idx,str(indx) + ".jpg"  )
 

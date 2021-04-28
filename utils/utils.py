@@ -51,8 +51,6 @@ def align_face(filepath, output_path, landmark_path = None ):
     if landmark_path is None:
         lm = get_landmark(filepath)
     else:
-        lm = np.load(landmark_path)
-        lm = np.transpose(lm, (1, 0))
         lm = np.load(landmark_path).transpose(1,0)[:,::-1]
 
     lm_chin          = lm[0  : 17]  # left-right
