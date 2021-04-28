@@ -118,13 +118,17 @@ if __name__ == '__main__':
         angle_x, angle_y, angle_z = get_face_orientation(id_idx, exp_idx, cam_idx)
         
         angles.append([angle_x, angle_y, angle_z])
-        if min_value > angle_x * 0.5 + angle_y * 0.2 + angle_z * 0.3:
-            min_value = angle_x * 0.5 + angle_y * 0.2 + angle_z * 0.3
+        if min_value > angle_x  + angle_y  + angle_z :
+            min_value = angle_x + angle_y  + angle_z 
             min_id = cam_idx
-        print(cam_idx,'=====', angle_x, angle_y, angle_z, '---', angle_x * 0.5 + angle_y * 0.2 + angle_z * 0.3)
+        print(cam_idx,'=====', angle_x, angle_y, angle_z, '---',angle_x + angle_y  + angle_z )
     angles = np.array(angles)
     print (angles.shape)
     print (min_id)
+    angle_sum = angles.sum(1)
+    small_index = angle_sum.argsort()[:3]
+    for indx in small_index:
+        print (indx, angle_sum[indx])
     
 
 
