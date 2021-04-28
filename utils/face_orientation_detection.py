@@ -99,7 +99,7 @@ def get_all_folder_example():
     for pid in pids:
         img_folder =  os.path.join(image_data_root, pid, '1_neutral')
         print (img_folder)
-        command = 'cp -r ' + img_folder + ' ./tmp/pid'
+        command = 'cp -r ' + img_folder + ' ./tmp/' + pid
         print (command)
         os.system(command)
 
