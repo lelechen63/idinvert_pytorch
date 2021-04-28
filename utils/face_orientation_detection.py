@@ -117,7 +117,7 @@ if __name__ == '__main__':
         angles = []
         min_value = 10000
         print (os.path.join( image_data_root , id_idx, "1_neutral"))
-        for cam_idx in range(len(os.listdir(os.path.join( image_data_root , id_idx, "1_neutral")))):
+        for cam_idx in range(len(os.listdir(os.path.join( image_data_root , id_idx, "1_neutral"))) -1):
             angle_x, angle_y, angle_z = get_face_orientation(int(id_idx), exp_idx, cam_idx)
             
             angles.append([angle_x, angle_y, angle_z])
