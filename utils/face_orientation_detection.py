@@ -111,6 +111,7 @@ if __name__ == '__main__':
     # get_all_folder_example()
     exp_idx = 1
     pids = os.listdir(image_data_root)
+    pids.sort()
     for id_idx in pids:
         # id_idx = 3
         angles = []
