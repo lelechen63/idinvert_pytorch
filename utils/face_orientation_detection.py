@@ -103,11 +103,18 @@ def get_all_folder_example():
         print (command)
         os.system(command)
 
-
-
-
-
-if __name__ == '__main__':
+def get_front_list():
+    gg =  open("./predef/frontface_list.txt", 'r')
+    while True:
+        line = gg.readline()
+        if not line:
+            break
+        print(line)
+        tmp = line.split(',')
+        print (tmp)
+        print(tmp[0], tmp[1])
+get_front_list()
+def  main():
     # get_all_folder_example()
     exp_idx = 1
     pids = os.listdir(image_data_root)
@@ -122,7 +129,6 @@ if __name__ == '__main__':
         print (os.path.join( image_data_root , id_idx, "1_neutral"))
         for cam_idx in range(len(os.listdir(os.path.join( image_data_root , id_idx, "1_neutral"))) -1):
             angle_x, angle_y, angle_z = get_face_orientation(int(id_idx), exp_idx, cam_idx)
-            
             angles.append([angle_x, angle_y, angle_z])
         angles = np.array(angles)
         angle_sum = angles.sum(1)
