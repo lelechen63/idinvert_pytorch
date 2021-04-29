@@ -106,7 +106,7 @@ def get_all_folder_example():
 
 def get_front_list():
     gg =  open("./predef/frontface_list.txt", 'r')
-    front_list = []
+    front_list = {}
     while True:
         line = gg.readline()[:-1]
         if not line:
@@ -115,7 +115,7 @@ def get_front_list():
         tmp = line.split(',')
         print (tmp)
         print(tmp[0], tmp[1])
-        front_list.append(tmp[:2])
+        front_list[tmp[0]] = tmp[1]
     with open('./predef/frontface_list.pkl', 'wb') as handle:
         pickle.dump(front_list, handle, protocol=pickle.HIGHEST_PROTOCOL)
 get_front_list()

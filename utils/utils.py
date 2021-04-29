@@ -180,6 +180,11 @@ def main_facescape_align():
     if not os.path.exists( base_p.replace('fsmview_images', 'ffhq_aligned_img') ):
         os.mkdir(base_p.replace('fsmview_images', 'ffhq_aligned_img'))
     save_p = base_p.replace('fsmview_images', 'ffhq_aligned_img')
+
+    _file = open( './predef/frontface_list.pkl', "rb")
+    front_indx = pickle.load(_file)
+
+
     for id_p in os.listdir(base_p):
         current_p = os.path.join( base_p , id_p)
         save_p1 = os.path.join( save_p , id_p)
@@ -190,20 +195,20 @@ def main_facescape_align():
             save_p2 = os.path.join( save_p1 , motion_p)
             if not os.path.exists(  os.path.join( save_p2 ) ):
                 os.mkdir( save_p2 ) 
-            img_names = os.listdir(current_p1)
-            img_names.sort()
-            for i in range(len(img_names)):
-                img_p = os.path.join( current_p1, img_names[i])
-                output_p = os.path.join( save_p2 , img_names[i])
-                lmark_p = img_p.replace('fsmview_images', 'fsmview_landmarks')[:-3] +'npy'
-                # if os.path.exists(output_p):
-                #     continue
-                try:
-                    # align_face(img_p, output_p)
-                    align_face(img_p, output_p, lmark_p)
-                    print (output_p)
-                except:
-                    continue
+            # img_names = os.listdir(current_p1)
+            # img_names.sort()
+            # for i in range(len(img_names)):
+            img_p = os.path.join( current_p1, img_names[i])
+            output_p = os.path.join( save_p2 , img_names[i])
+            lmark_p = img_p.replace('fsmview_images', 'fsmview_landmarks')[:-3] +'npy'
+            # if os.path.exists(output_p):
+            #     continue
+            try:
+                # align_face(img_p, output_p)
+                align_face(img_p, output_p, lmark_p)
+                print (output_p)
+            except:
+                continue
             #     aligned_img = cv2.imread(img_p.replace( 'original', 'aligned'))
             #     aligned_img = cv2.cvtColor(aligned_img, cv2.COLOR_RGB2BGR)
             #     gt_imgs.append(preprocess(aligned_img))
