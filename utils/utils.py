@@ -10,7 +10,7 @@ import dlib
 import numpy as np
 import time 
 import argparse
-
+import pickle
 
 # download model from: http://dlib.net/files/shape_predictor_68_face_landmarks.dat.bz2
 # predictor = dlib.shape_predictor('/u/lchen63/github/genforce/utils/shape_predictor_68_face_landmarks.dat')
@@ -244,12 +244,12 @@ def load_data():
 def parse_args():
     parser = argparse.ArgumentParser()
 
-    parser.add_argument("--start",
+    parser.add_argument("--k",
                      type=int,
                      default=0)
     return parser.parse_args()
 config = parse_args()
 
-main_facescape_align(config.start)
+main_facescape_align(config.k)
 # trans_video_to_imgs( '/raid/celong/mead/tmp/001.mp4', '/raid/celong/mead/tmp/001', write_img = True )
 # trans_video_to_imgs( '/home/cxu-serve/p1/lchen63/nerf/data/mead/001.mp4', '/home/cxu-serve/p1/lchen63/nerf/data/mead/001/original', write_img = True )
