@@ -244,11 +244,11 @@ def load_data():
 def parse_args():
     parser = argparse.ArgumentParser()
 
-    parser.add_argument("--K",
+    parser.add_argument("--start",
                      type=int,
                      default=0)
 config = parse_args()
 
-main_facescape_align(config.K)
+main_facescape_align(config.start)
 # trans_video_to_imgs( '/raid/celong/mead/tmp/001.mp4', '/raid/celong/mead/tmp/001', write_img = True )
 # trans_video_to_imgs( '/home/cxu-serve/p1/lchen63/nerf/data/mead/001.mp4', '/home/cxu-serve/p1/lchen63/nerf/data/mead/001/original', write_img = True )
