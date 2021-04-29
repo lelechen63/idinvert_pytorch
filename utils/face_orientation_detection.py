@@ -8,6 +8,7 @@ import imageio
 import openmesh
 import cv2
 from tqdm import tqdm
+import pickle
 
 image_data_root = "/raid/celong/FaceScape/fsmview_images"
 landmark_root = "/raid/celong/FaceScape/fsmview_landmarks"
@@ -105,14 +106,18 @@ def get_all_folder_example():
 
 def get_front_list():
     gg =  open("./predef/frontface_list.txt", 'r')
+    front_list = []
     while True:
-        line = gg.readline()
+        line = gg.readline()[:-1]
         if not line:
             break
         print(line)
         tmp = line.split(',')
         print (tmp)
         print(tmp[0], tmp[1])
+        front_list.append(tmp[:2])
+    with open('./predef/frontface_list.pkl', 'wb') as handle:
+        pickle.dump(front_list, handle, protocol=pickle.HIGHEST_PROTOCOL)
 get_front_list()
 def  main():
     # get_all_folder_example()
