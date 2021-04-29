@@ -247,6 +247,7 @@ def parse_args():
     parser.add_argument("--start",
                      type=int,
                      default=0)
+    return parser.parse_args()
 config = parse_args()
 
 main_facescape_align(config.start)
