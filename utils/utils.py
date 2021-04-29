@@ -9,6 +9,7 @@ import scipy.ndimage
 import dlib
 import numpy as np
 import time 
+import argparse
 
 
 # download model from: http://dlib.net/files/shape_predictor_68_face_landmarks.dat.bz2
@@ -175,7 +176,7 @@ def main_mead_video2imgs():
                             os.mkdir( v_p[:-4] )
                         trans_video_to_imgs( v_p, v_p[:-4] , write_img = True )
 
-def main_facescape_align():
+def main_facescape_align(K):
     base_p = '/raid/celong/FaceScape/fsmview_images'
     if not os.path.exists( base_p.replace('fsmview_images', 'ffhq_aligned_img') ):
         os.mkdir(base_p.replace('fsmview_images', 'ffhq_aligned_img'))
@@ -184,10 +185,13 @@ def main_facescape_align():
     _file = open( './predef/frontface_list.pkl', "rb")
     front_indx = pickle.load(_file)
 
+    ids =  os.listdir(base_p)
+    ids.sort()
 
-    for id_p in os.listdir(base_p):
+    for id_p in ids[K * 50: (K + 1) * 50]:
         current_p = os.path.join( base_p , id_p)
         save_p1 = os.path.join( save_p , id_p)
+        front_idx = front_indx[id_p]
         if not os.path.exists(  os.path.join( save_p1 ) ):
             os.mkdir( save_p1 ) 
         for motion_p in os.listdir(current_p):
@@ -198,8 +202,8 @@ def main_facescape_align():
             # img_names = os.listdir(current_p1)
             # img_names.sort()
             # for i in range(len(img_names)):
-            img_p = os.path.join( current_p1, img_names[i])
-            output_p = os.path.join( save_p2 , img_names[i])
+            img_p = os.path.join( current_p1, front_idx + '.jpg')
+            output_p = os.path.join( save_p2 ,front_idx + '.jpg')
             lmark_p = img_p.replace('fsmview_images', 'fsmview_landmarks')[:-3] +'npy'
             # if os.path.exists(output_p):
             #     continue
@@ -237,6 +241,14 @@ def load_data():
     return gt_imgs
 
     
-main_facescape_align()
+def parse_args():
+    parser = argparse.ArgumentParser()
+
+    parser.add_argument("--K",
+                     type=int,
+                     default=0)
+config = parse_args()
+
+main_facescape_align(config.K)
 # trans_video_to_imgs( '/raid/celong/mead/tmp/001.mp4', '/raid/celong/mead/tmp/001', write_img = True )
 # trans_video_to_imgs( '/home/cxu-serve/p1/lchen63/nerf/data/mead/001.mp4', '/home/cxu-serve/p1/lchen63/nerf/data/mead/001/original', write_img = True )
