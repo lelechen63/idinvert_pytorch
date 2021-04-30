@@ -231,7 +231,7 @@ def main_facescape_render_align(K):
     ids =  os.listdir(base_p)
     ids.sort()
 
-    for id_p in ids[K * 50: (K + 1) * 50]:
+    for id_p in ids[K * 5: (K + 1) * 5]:
         current_p = os.path.join( base_p , id_p)
         save_p1 = os.path.join( save_p , id_p)
         front_idx = front_indx[id_p]
@@ -260,7 +260,7 @@ def main_facescape_render_align(K):
                 print (output_p)
             # break
             except:
-                print (output_p，'+++++')
+                print (output_p,'+++++')
                 continue
             #     aligned_img = cv2.imread(img_p.replace( 'original', 'aligned'))
             #     aligned_img = cv2.cvtColor(aligned_img, cv2.COLOR_RGB2BGR)
