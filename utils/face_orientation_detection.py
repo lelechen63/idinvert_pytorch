@@ -120,8 +120,21 @@ def get_front_pickle():
         pickle.dump(front_list, handle, protocol=pickle.HIGHEST_PROTOCOL)
 # get_front_list()
 def  get_front_list():
-    # get_all_folder_example()
-    # exp_idx = 1
+    angle_lists =  open("./predef/angle_list.txt", 'r')
+    total_list = {}
+    while True:
+        line = gg.readline()[:-1]
+        if not line:
+            break
+        print(line)
+        tmp = line.split(',')
+        print (tmp)
+        print(tmp[0], tmp[1])
+        total_list[tmp[0] +'__' + tmp[1] + '__' + tmp[2]] = [float(tmp[3]),float(tmp[4]), float(tmp[5])]
+    print (total_list)
+
+    
+
     pids = os.listdir(image_data_root)
     pids.sort()
     gg =  open("./predef/frontface_list.txt", 'w')
@@ -197,6 +210,6 @@ def  get_valid_list():
             # print (id_idx +',' + str(expressions[exp_idx]) + ',' + str(small_index[0])  )
             # gg.write(id_idx +',' + str(expressions[exp_idx]) + ',' +str(small_index[0])  + '\n')
 
-get_valid_pickle()
+# get_valid_pickle()
 
-# get_front_list()
+get_front_list()
