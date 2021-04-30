@@ -12,7 +12,7 @@ import argparse
 from tqdm import tqdm
 import numpy as np
 import cv2
-
+import pickle
 from utils.inverter import StyleGANInverter
 from utils.logger import setup_logger
 from utils.visualizer import HtmlPageVisualizer
@@ -69,20 +69,24 @@ def load_data():
 
 def main_load_data():
     """ load the video data"""
-    img_path = '/raid/celong/FaceScape/ffhq_aligned_img'
-    person_id = '140'
-    # img_path = '/raid/celong/mead/tmp'
-    # person_id = '001'
-    img_path = os.path.join(img_path, person_id)
+    base_p = '/raid/celong/FaceScape/ffhq_aligned_img'
+    _file = open( '/raid/celong/lele/github/idinvert_pytorch/predef/validface_list.pkl', "rb")
+    valid_all = pickle.load(_file)
+    ids =  os.listdir(base_p)
+    ids.sort()
     img_names = []
-    for root, dirs, files in os.walk(img_path):
-      for filename in  files:
-        if filename[-3:] == 'png'  or  filename[-3:] == 'jpg':
-          if filename.split('.')[0] == '1':
-            img_p = os.path.join(root, filename)
-            print(filename)
-            print (img_p)
-            img_names.append(img_p)
+    for id_p in ids:
+        current_p = os.path.join( base_p , id_p)
+        
+        for motion_p in os.listdir(current_p):
+            print(id_p, motion_p)
+            current_p1 = os.path.join( current_p , motion_p)
+            valid_idxs = valid_all[id_p +'__' + motion_p]
+            for valid_f in valid_idxs:
+              img_path = os.path.join( current_p1, valid_f + '.jpg')
+                
+        
+              img_names.append(img_p)
 
     img_names.sort()
     f = open( os.path.join(img_path, 'img_list2.txt'),'w')

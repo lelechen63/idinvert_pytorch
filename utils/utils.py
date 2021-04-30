@@ -260,14 +260,13 @@ def main_facescape_render_align(K):
             save_p2 = os.path.join( save_p1 , motion_p)
             if not os.path.exists(  os.path.join( save_p2 ) ):
                 os.mkdir( save_p2 ) 
-            
-            valid_idxs = valid_all[id_p +'__' + motion_p]
             # debug
             # img_p = "/raid/celong/FaceScape/fsmview_renderings/1/9_mouth_right/1.png"
             # lmark_path = "/raid/celong/FaceScape/fsmview_landmarks/1/9_mouth_right/1.npy"
             # output_p = "/raid/celong/FaceScape/ffhq_aligned_img/1/9_mouth_right/1_render.png"
+            
+            valid_idxs = valid_all[id_p +'__' + motion_p]
             for valid_f in valid_idxs:
-
                 img_p = os.path.join( current_p1, valid_f + '.png')
                 output_p = os.path.join( save_p2 ,valid_f + '_render.png')
                 lmark_p = img_p.replace('fsmview_renderings', 'fsmview_landmarks')[:-3] +'npy'
