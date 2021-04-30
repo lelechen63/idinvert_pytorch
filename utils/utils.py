@@ -123,12 +123,14 @@ def align_face(filepath, output_path, landmark_path = None ):
     pad = (int(np.floor(min(quad[:,0]))), int(np.floor(min(quad[:,1]))), int(np.ceil(max(quad[:,0]))), int(np.ceil(max(quad[:,1]))))
     pad = (max(-pad[0] + border, 0), max(-pad[1] + border, 0), max(pad[2] - img.size[0] + border, 0), max(pad[3] - img.size[1] + border, 0))
     if enable_padding and max(pad) > border - 4:
-        print (img.shape)
-        cv2.imwrite('gg1.png')
+        # print (img.shape)
+        kk =  np.array(img)
+        print (kk.shape)
+        cv2.imwrite('gg1.png',  kk)
         pad = np.maximum(pad, int(np.rint(qsize * 0.3)))
         
         img = np.pad(np.float32(img), ((pad[1], pad[3]), (pad[0], pad[2]), (0, 0)), 'reflect')
-        cv2.imwrite('gg.png')
+        cv2.imwrite('gg.png', img)
         print (img.shape)
         h, w, _ = img.shape
         
