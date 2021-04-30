@@ -207,9 +207,9 @@ def main_facescape_align(K):
             lmark_p = img_p.replace('fsmview_images', 'fsmview_landmarks')[:-3] +'npy'
 
             # debug
-            img_p = "/raid/celong/FaceScape/fsmview_images/1//1_neutral/15.png"
-            lmark_path = "/raid/celong/FaceScape/fsmview_landmarks/1//1_neutral/15.npy"
-            output_p = "/raid/celong/FaceScape/ffhq_aligned_img/1//1_neutral/15.png"
+            img_p = "/raid/celong/FaceScape/fsmview_images/1/1_neutral/15.jpg"
+            lmark_path = "/raid/celong/FaceScape/fsmview_landmarks/1/1_neutral/15.npy"
+            output_p = "/raid/celong/FaceScape/ffhq_aligned_img/1/1_neutral/15.png"
 
 
             # if os.path.exists(output_p):
