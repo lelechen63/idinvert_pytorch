@@ -14,7 +14,7 @@ import pickle
 
 # download model from: http://dlib.net/files/shape_predictor_68_face_landmarks.dat.bz2
 # predictor = dlib.shape_predictor('/u/lchen63/github/genforce/utils/shape_predictor_68_face_landmarks.dat')
-fa = face_alignment.FaceAlignment(face_alignment.LandmarksType._2D, flip_input=False)
+# fa = face_alignment.FaceAlignment(face_alignment.LandmarksType._2D, flip_input=False)
 
 predictor = dlib.shape_predictor('/raid/celong/lele/github/idinvert_pytorch/utils/shape_predictor_68_face_landmarks.dat')
 def get_landmark(filepath):
