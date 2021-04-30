@@ -80,7 +80,6 @@ def main_load_data():
         current_p = os.path.join( base_p , id_p)
         
         for motion_p in os.listdir(current_p):
-            print(id_p, motion_p)
             current_p1 = os.path.join( current_p , motion_p)
             try:
               print (id_p +'__' + motion_p)
