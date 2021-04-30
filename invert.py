@@ -86,17 +86,17 @@ def main_load_data():
               img_path = os.path.join( current_p1, valid_f + '.jpg')
                 
         
-              img_names.append(img_p)
+              img_names.append(img_path)
 
     img_names.sort()
-    f = open( os.path.join(img_path, 'img_list2.txt'),'w')
+    f = open( os.path.join('/raid/celong/FaceScape', 'lists', 'inversion.txt'),'w')
     for i in range(len(img_names)):
         img_p = os.path.join( img_path, img_names[i])
         f.write(img_p +'\n')
         # if i == 5:
         #   break   
     f.close
-    return  os.path.join(img_path, 'img_list2.txt')
+    return  os.path.join('/raid/celong/FaceScape', 'lists', 'inversion.txt')
 
 
 def main(image_list = None):
