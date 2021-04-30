@@ -164,8 +164,8 @@ def  get_valid_list():
                 angle_lists.write(id_idx +',' + str(expressions[exp_idx]) + ',' + str(cam_idx) + ','  +  str(angle_x) + ','  +  str(angle_y)+ ','  +  str(angle_z) + '\n')
                 # angles.append([angle_x, angle_y, angle_z])
                 if angle_x < 90 and angle_y < 30 and angle_z < 90:
-                    print (id_idx +',' + str(expressions[exp_idx]) + ',' + cam_idx)
-                    gg.write(id_idx +',' + str(expressions[exp_idx]) + ',' + cam_idx  + '\n')
+                    print (id_idx +',' + str(expressions[exp_idx]) + ',' + str(cam_idx) )
+                    gg.write(id_idx +',' + str(expressions[exp_idx]) + ',' + str(cam_idx)   + '\n')
                 # angles.append(angle_x)
             # angles = np.array(angles)
             # angle_x_max = angles.max(:,0)
