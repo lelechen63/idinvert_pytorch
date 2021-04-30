@@ -123,7 +123,7 @@ def  get_front_list():
     angle_lists =  open("./predef/angle_list.txt", 'r')
     total_list = {}
     while True:
-        line = gg.readline()[:-1]
+        line = angle_lists.readline()[:-1]
         if not line:
             break
         print(line)
