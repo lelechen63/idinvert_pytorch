@@ -33,7 +33,7 @@ def parse_args():
                       help='Learning rate for optimization. (default: 0.01)')
   parser.add_argument('--num_iterations', type=int, default=100,
                       help='Number of optimization iterations. (default: 100)')
-  parser.add_argument('--num_results', type=int, default=3,
+  parser.add_argument('--num_results', type=int, default=1,
                       help='Number of intermediate optimization results to '
                            'save for each sample. (default: 5)')
   parser.add_argument('--loss_weight_feat', type=float, default=5e-5,
@@ -156,7 +156,7 @@ def main(image_list = None):
       mask = cv2.imread(mask_path)
       print (mask.shape, image.shape)
       image = image * mask 
-      image = resize_image(load_image(image_path), (image_size, image_size))
+      image = resize_image(image, (image_size, image_size))
       code, viz_results = inverter.easy_invert(image, num_viz=args.num_results)
       latent_codes.append(code)
       np.save(image_path[:-3] +  'npy',code)
