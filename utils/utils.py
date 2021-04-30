@@ -271,12 +271,12 @@ def main_facescape_render_align(K):
                 img_p = os.path.join( current_p1, valid_f + '.png')
                 output_p = os.path.join( save_p2 ,valid_f + '_render.png')
                 lmark_p = img_p.replace('fsmview_renderings', 'fsmview_landmarks')[:-3] +'npy'
-            try:
-                align_face(img_p, output_p, lmark_p)
-                print (output_p)
-            except:
-                print (output_p,'+++++')
-                continue
+                try:
+                    align_face(img_p, output_p, lmark_p)
+                    print (output_p)
+                except:
+                    print (output_p,'+++++')
+                    continue
          
 def load_data():
     """ load the video data"""
