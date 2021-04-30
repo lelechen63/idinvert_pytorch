@@ -139,8 +139,8 @@ def  main():
             angles = np.array(angles)
             angle_sum = angles.sum(1)
             small_index = angle_sum.argsort()[0]
-            print (id_idx +',' + str(expressions[exp_id]) + ',' str(small_index)  )
-            gg.write(id_idx +',' + str(expressions[exp_id]) + ',' str(small_index)  + '\n')
+            print (id_idx +',' + str(expressions[exp_id]) + ',' + str(small_index)  )
+            gg.write(id_idx +',' + str(expressions[exp_id]) + ',' +str(small_index)  + '\n')
             # for indx in small_index:
             #     print (indx, angle_sum[indx])
             #     gg.write(',' +  str(indx) )
