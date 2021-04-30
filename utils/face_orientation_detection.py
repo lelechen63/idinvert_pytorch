@@ -128,8 +128,9 @@ def  main():
 
     for id_idx in pids:
         
-        angles = []
+        
         for exp_id in range(len(expressions)):
+            angles = []
             exp_idx = exp_id + 1        
             print (os.path.join( image_data_root , id_idx, expressions[exp_idx]))
             for cam_idx in range(len(os.listdir(os.path.join( image_data_root , id_idx, expressions[exp_idx]))) -1):
