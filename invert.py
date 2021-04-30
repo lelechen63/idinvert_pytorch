@@ -75,7 +75,6 @@ def main_load_data():
     ids =  os.listdir(base_p)
     ids.sort()
     img_names = []
-    print (valid_all)
     for id_p in ids:
         current_p = os.path.join( base_p , id_p)
         
@@ -89,6 +88,7 @@ def main_load_data():
             except:              
               continue
     img_names.sort()
+    print (len(img_names))
     f = open( os.path.join('/raid/celong/FaceScape', 'lists', 'inversion.txt'),'w')
     for i in range(len(img_names)):
         img_p = os.path.join( img_path, img_names[i])
