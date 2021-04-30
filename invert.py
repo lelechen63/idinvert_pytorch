@@ -153,25 +153,25 @@ def main(image_list = None):
     #   print (image_path[:-3] +  'npy')
     #   print ('!!!')
       # continue
-    try:
-      image = load_image(image_path)
-      mask = cv2.imread(mask_path)
-      print (mask.max(), max.min())
-      print (image_path)
-      image = image * mask 
-      image = resize_image(image, (image_size, image_size))
-      code, viz_results = inverter.easy_invert(image, num_viz=args.num_results)
-      latent_codes.append(code)
-      np.save(image_path[:-3] +  'npy',code)
-      save_image(f'{output_dir}/{image_name}__ori.png', image)
-      save_image(f'{output_dir}/{image_name}__enc.png', viz_results[1])
-      save_image(f'{output_dir}/{image_name}__inv.png', viz_results[-1])
-      visualizer.set_cell(img_idx, 0, text=image_name)
-      visualizer.set_cell(img_idx, 1, image=image)
-      for viz_idx, viz_img in enumerate(viz_results[1:]):
-        visualizer.set_cell(img_idx, viz_idx + 2, image=viz_img)
-    except:
-      continue
+    # try:
+    image = load_image(image_path)
+    mask = cv2.imread(mask_path)
+    print (mask.max(), max.min())
+    print (image_path)
+    image = image * mask 
+    image = resize_image(image, (image_size, image_size))
+    code, viz_results = inverter.easy_invert(image, num_viz=args.num_results)
+    latent_codes.append(code)
+    np.save(image_path[:-3] +  'npy',code)
+    save_image(f'{output_dir}/{image_name}__ori.png', image)
+    save_image(f'{output_dir}/{image_name}__enc.png', viz_results[1])
+    save_image(f'{output_dir}/{image_name}__inv.png', viz_results[-1])
+    visualizer.set_cell(img_idx, 0, text=image_name)
+    visualizer.set_cell(img_idx, 1, image=image)
+    for viz_idx, viz_img in enumerate(viz_results[1:]):
+      visualizer.set_cell(img_idx, viz_idx + 2, image=viz_img)
+    # except:
+    #   continue
   # Save results.
   # os.system(f'cp {args.image_list} {output_dir}/image_list.txt')
   visualizer.save(f'{output_dir}/inversion.html')
