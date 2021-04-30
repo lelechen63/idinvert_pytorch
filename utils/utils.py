@@ -187,7 +187,7 @@ def main_facescape_align(K):
 
     ids =  os.listdir(base_p)
     ids.sort()
-
+    print (len(ids))
     for id_p in ids[K * 10: (K + 1) * 10]:
         current_p = os.path.join( base_p , id_p)
         save_p1 = os.path.join( save_p , id_p)
