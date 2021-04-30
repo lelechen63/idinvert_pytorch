@@ -230,12 +230,12 @@ def main_facescape_align(K):
             #     continue
             align_face(img_p, output_p, lmark_p)
             print (output_p)
-            try:
-                # align_face(img_p, output_p)
-                align_face(img_p, output_p, lmark_p)
-                print (output_p)
-            except:
-                continue
+            # try:
+            #     # align_face(img_p, output_p)
+            #     align_face(img_p, output_p, lmark_p)
+            #     print (output_p)
+            # except:
+            #     continue
             print (gg)
             #     aligned_img = cv2.imread(img_p.replace( 'original', 'aligned'))
             #     aligned_img = cv2.cvtColor(aligned_img, cv2.COLOR_RGB2BGR)
