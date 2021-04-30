@@ -166,7 +166,7 @@ def  get_valid_list():
             angle_max = angles.max(1)
             small_index = angle_max.argsort()#[:3]
             for kk in small_index:
-                print (kk, angles[kk])
+                print (kk, angles[kk]， angle_max[kk])
             # print (id_idx +',' + str(expressions[exp_idx]) + ',' + str(small_index[0])  )
             # gg.write(id_idx +',' + str(expressions[exp_idx]) + ',' +str(small_index[0])  + '\n')
 
