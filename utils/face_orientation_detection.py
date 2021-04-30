@@ -118,7 +118,7 @@ def get_front_list():
         front_list[tmp[0]] = tmp[1]
     with open('./predef/frontface_list.pkl', 'wb') as handle:
         pickle.dump(front_list, handle, protocol=pickle.HIGHEST_PROTOCOL)
-get_front_list()
+# get_front_list()
 def  main():
     # get_all_folder_example()
     exp_idx = 1
@@ -130,27 +130,29 @@ def  main():
         if not os.path.exists( os.path.join( "/raid/celong/FaceScape/tmp" , id_idx) ):
             os.mkdir(os.path.join( "/raid/celong/FaceScape/tmp" , id_idx))
         angles = []
-        min_value = 10000
-        print (os.path.join( image_data_root , id_idx, "1_neutral"))
-        for cam_idx in range(len(os.listdir(os.path.join( image_data_root , id_idx, "1_neutral"))) -1):
-            angle_x, angle_y, angle_z = get_face_orientation(int(id_idx), exp_idx, cam_idx)
-            angles.append([angle_x, angle_y, angle_z])
-        angles = np.array(angles)
-        angle_sum = angles.sum(1)
-        small_index = angle_sum.argsort()[:3]
-        print (id_idx)
-        gg.write(id_idx )
-        for indx in small_index:
-            print (indx, angle_sum[indx])
-            gg.write(',' +  str(indx) )
-            img_path = os.path.join( image_data_root , id_idx, "1_neutral",  str(indx) + ".jpg" )
-            target_path =  os.path.join( "/raid/celong/FaceScape/tmp" , id_idx,str(indx) + ".jpg"  )
+        for exp_id in range(len(expressions)):
+                
+            print (os.path.join( image_data_root , id_idx, expressions[exp_id]))
+            for cam_idx in range(len(os.listdir(os.path.join( image_data_root , id_idx, expressions[exp_id]))) -1):
+                angle_x, angle_y, angle_z = get_face_orientation(int(id_idx), exp_idx, cam_idx)
+                angles.append([angle_x, angle_y, angle_z])
+            angles = np.array(angles)
+            angle_sum = angles.sum(1)
+            small_index = angle_sum.argsort()[0]
+            print (id_idx +',' + str(expressions[exp_id]) + ',' str(small_index)  )
+            gg.write(id_idx +',' + str(expressions[exp_id]) + ',' str(small_index)  + '\n')
+            # for indx in small_index:
+            #     print (indx, angle_sum[indx])
+            #     gg.write(',' +  str(indx) )
+                # img_path = os.path.join( image_data_root , id_idx, expressions[exp_id],  str(indx) + ".jpg" )
+                # target_path =  os.path.join( "/raid/celong/FaceScape/tmp" , id_idx,str(indx) + ".jpg"  )
 
-            command = 'cp ' + img_path + ' ' + target_path
-            os.system(command)
-            print (img_path)
-        gg.write('\n')
+                # command = 'cp ' + img_path + ' ' + target_path
+                # os.system(command)
+                # print (img_path)
+            # gg.write('\n')
         # break
     # img_path = f"{img_dir}/{cam_idx}.jpg"
     # print (img_path)
     # os.system(f"cp {img_path} tmp/")
+main()
