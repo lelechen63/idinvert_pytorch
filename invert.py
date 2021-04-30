@@ -156,7 +156,7 @@ def main(image_list = None):
     # try:
     image = load_image(image_path)
     mask = cv2.imread(mask_path)
-    print (mask.max(), max.min())
+    print (mask.max(), mask.min())
     print (image_path)
     image = image * mask 
     image = resize_image(image, (image_size, image_size))
