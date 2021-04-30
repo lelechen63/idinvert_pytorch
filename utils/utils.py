@@ -205,7 +205,7 @@ def main_facescape_align(K):
     save_p = base_p.replace('fsmview_images', 'ffhq_aligned_img')
 
     _file = open( './predef/validface_list.pkl', "rb")
-    front_indx = pickle.load(_file)
+    valid_indx = pickle.load(_file)
 
     ids =  os.listdir(base_p)
     ids.sort()
@@ -213,7 +213,7 @@ def main_facescape_align(K):
     for id_p in ids[K * 10: (K + 1) * 10]:
         current_p = os.path.join( base_p , id_p)
         save_p1 = os.path.join( save_p , id_p)
-        front_idx = front_indx[id_p]
+        
         if not os.path.exists(  os.path.join( save_p1 ) ):
             os.mkdir( save_p1 ) 
         for motion_p in os.listdir(current_p):
@@ -221,12 +221,14 @@ def main_facescape_align(K):
             save_p2 = os.path.join( save_p1 , motion_p)
             if not os.path.exists(  os.path.join( save_p2 ) ):
                 os.mkdir( save_p2 ) 
+            valid_idxs = front_indx[id_p +'__' + motion_p]
+            for valid_f in valid_idxs:
             # img_names = os.listdir(current_p1)
             # img_names.sort()
             # for i in range(len(img_names)):
-            img_p = os.path.join( current_p1, front_idx + '.jpg')
-            output_p = os.path.join( save_p2 ,front_idx + '.jpg')
-            lmark_p = img_p.replace('fsmview_images', 'fsmview_landmarks')[:-3] +'npy'
+                img_p = os.path.join( current_p1, valid_f + '.jpg')
+                output_p = os.path.join( save_p2 ,valid_f + '.jpg')
+                lmark_p = img_p.replace('fsmview_images', 'fsmview_landmarks')[:-3] +'npy'
 
             #############################
             # debug
@@ -239,19 +241,12 @@ def main_facescape_align(K):
             # print (output_p)
             #############################
 
-            try:
-                # align_face(img_p, output_p)
+                # try:
+                    # align_face(img_p, output_p)
                 align_face(img_p, output_p, lmark_p)
                 print (output_p)
-            except:
-                continue
-            # print (gg)
-            #     aligned_img = cv2.imread(img_p.replace( 'original', 'aligned'))
-            #     aligned_img = cv2.cvtColor(aligned_img, cv2.COLOR_RGB2BGR)
-            #     gt_imgs.append(preprocess(aligned_img))
-            # gt_imgs = np.asarray(gt_imgs)
-            # gt_imgs = torch.FloatTensor(gt_imgs)
-            # return gt_imgs
+                # except:
+                #     continue
 
 def main_facescape_render_align(K):
     base_p = '/raid/celong/FaceScape/fsmview_renderings'
