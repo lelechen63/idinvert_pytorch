@@ -163,7 +163,10 @@ def  get_valid_list():
                 angles.append([angle_x, angle_y, angle_z])
                 # angles.append(angle_x)
             angles = np.array(angles)
-            angle_max = angles.max(1)
+            # angle_x_max = angles.max(:,0)
+            # angle_y_max = angles.max(:,1)
+            # angle_z_max = angles.max(:,2)
+
             small_index = angle_max.argsort()#[:3]
             for kk in small_index:
                 print (kk, angles[kk], angle_max[kk])

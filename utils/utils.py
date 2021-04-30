@@ -205,6 +205,13 @@ def main_facescape_align(K):
             img_p = os.path.join( current_p1, front_idx + '.jpg')
             output_p = os.path.join( save_p2 ,front_idx + '.jpg')
             lmark_p = img_p.replace('fsmview_images', 'fsmview_landmarks')[:-3] +'npy'
+
+            # debug
+            img_p = "/raid/celong/FaceScape/fsmview_images/1//1_neutral/15.png"
+            lmark_path = "/raid/celong/FaceScape/fsmview_landmarks/1//1_neutral/15.npy"
+            output_p = "/raid/celong/FaceScape/ffhq_aligned_img/1//1_neutral/15.png"
+
+
             # if os.path.exists(output_p):
             #     continue
             try:
@@ -213,6 +220,7 @@ def main_facescape_align(K):
                 print (output_p)
             except:
                 continue
+            print (gg)
             #     aligned_img = cv2.imread(img_p.replace( 'original', 'aligned'))
             #     aligned_img = cv2.cvtColor(aligned_img, cv2.COLOR_RGB2BGR)
             #     gt_imgs.append(preprocess(aligned_img))
@@ -298,6 +306,6 @@ def parse_args():
     return parser.parse_args()
 config = parse_args()
 
-main_facescape_render_align(config.k)
+main_facescape_align(config.k)
 # trans_video_to_imgs( '/raid/celong/mead/tmp/001.mp4', '/raid/celong/mead/tmp/001', write_img = True )
 # trans_video_to_imgs( '/home/cxu-serve/p1/lchen63/nerf/data/mead/001.mp4', '/home/cxu-serve/p1/lchen63/nerf/data/mead/001/original', write_img = True )
