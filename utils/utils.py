@@ -220,6 +220,56 @@ def main_facescape_align(K):
             # gt_imgs = torch.FloatTensor(gt_imgs)
             # return gt_imgs
 
+def main_facescape_render_align(K):
+    base_p = '/raid/celong/FaceScape/fsmview_renderings'
+   
+    save_p = base_p.replace('fsmview_renderings', 'ffhq_aligned_img')
+
+    _file = open( './predef/frontface_list.pkl', "rb")
+    front_indx = pickle.load(_file)
+
+    ids =  os.listdir(base_p)
+    ids.sort()
+
+    for id_p in ids[K * 50: (K + 1) * 50]:
+        current_p = os.path.join( base_p , id_p)
+        save_p1 = os.path.join( save_p , id_p)
+        front_idx = front_indx[id_p]
+        if not os.path.exists(  os.path.join( save_p1 ) ):
+            os.mkdir( save_p1 ) 
+        for motion_p in os.listdir(current_p):
+            current_p1 = os.path.join( current_p , motion_p)
+            save_p2 = os.path.join( save_p1 , motion_p)
+            if not os.path.exists(  os.path.join( save_p2 ) ):
+                os.mkdir( save_p2 ) 
+            # img_names = os.listdir(current_p1)
+            # img_names.sort()
+            # for i in range(len(img_names)):
+            img_p = os.path.join( current_p1, front_idx + '.jpg')
+            output_p = os.path.join( save_p2 ,front_idx + '_render.jpg')
+            lmark_p = img_p.replace('fsmview_renderings', 'fsmview_landmarks')[:-3] +'npy'
+
+            # debug
+            img_p = "/raid/celong/FaceScape/fsmview_renderings/1/9_mouth_right/1.jpg"
+            lmark_path = "/raid/celong/FaceScape/fsmview_landmarks/1/9_mouth_right/1.npy"
+            output_p = "/raid/celong/FaceScape/ffhq_aligned_img/1/9_mouth_right/1_render.png"
+
+
+            # if os.path.exists(output_p):
+            #     continue
+            # try:
+                # align_face(img_p, output_p)
+            align_face(img_p, output_p, lmark_p)
+            print (output_p)
+            break
+            # except:
+            #     continue
+            #     aligned_img = cv2.imread(img_p.replace( 'original', 'aligned'))
+            #     aligned_img = cv2.cvtColor(aligned_img, cv2.COLOR_RGB2BGR)
+            #     gt_imgs.append(preprocess(aligned_img))
+            # gt_imgs = np.asarray(gt_imgs)
+            # gt_imgs = torch.FloatTensor(gt_imgs)
+            # return gt_imgs
 
 def load_data():
     """ load the video data"""
@@ -250,6 +300,6 @@ def parse_args():
     return parser.parse_args()
 config = parse_args()
 
-main_facescape_align(config.k)
+main_facescape_render_align(config.k)
 # trans_video_to_imgs( '/raid/celong/mead/tmp/001.mp4', '/raid/celong/mead/tmp/001', write_img = True )
 # trans_video_to_imgs( '/home/cxu-serve/p1/lchen63/nerf/data/mead/001.mp4', '/home/cxu-serve/p1/lchen63/nerf/data/mead/001/original', write_img = True )
