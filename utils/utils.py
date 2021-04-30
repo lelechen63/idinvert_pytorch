@@ -89,7 +89,7 @@ def align_face(filepath, output_path, landmark_path = None ):
     cv_img = np.array(img)#[..., ::-1]
     print (cv_img.shape, lm.shape)
     for kk in range(lm.shape[0]):
-        cv2.circle(cv_img, (50,50), 2, （0，0，255), -1)
+        cv2.circle(cv_img, (50,50), 2, （0,0,255), -1)
     cv2.imwrite('gg.png',cv_img)
 
     output_size=1024
