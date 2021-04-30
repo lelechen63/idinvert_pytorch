@@ -54,7 +54,7 @@ def align_face(filepath, output_path, landmark_path = None ):
     if landmark_path is None:
         lm = get_landmark(filepath)
     else:
-        lm = np.load(landmark_path).transpose(1,0)[:,::-1]
+        lm = np.load(landmark_path).transpose(1,0)
 
     lm_chin          = lm[0  : 17]  # left-right
     lm_eyebrow_left  = lm[17 : 22]  # left-right
@@ -90,18 +90,13 @@ def align_face(filepath, output_path, landmark_path = None ):
 
     cv_img = cv2.imread(filepath)
     cv_img =cv2.cvtColor(cv_img, cv2.COLOR_BGR2RGB)
-    #[..., ::-1]
 
-    print (cv_img.shape, lm.shape)
-    lm = lm[:,::-1]
-
-    # lm[:,0] = cv_img.shape[0] - lm[:,0]
-    # lm[:,1] = cv_img.shape[1] - lm[:,1]
+    # print (cv_img.shape, lm.shape)
     
     for kk in range(lm.shape[0]):
         x = int(lm[kk][0])
         y = int(lm[kk][1])
-        print (x,y)
+        # print (x,y)
 
         cv2.circle(cv_img, (y,x), 2, (0,0,255), -1)
     cv_img = cv2.cvtColor(cv_img, cv2.COLOR_RGB2BGR)
