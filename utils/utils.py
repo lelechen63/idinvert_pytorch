@@ -54,7 +54,7 @@ def align_face(filepath, output_path, landmark_path = None ):
     if landmark_path is None:
         lm = get_landmark(filepath)
     else:
-        lm = np.load(landmark_path).transpose(1,0)[:,::-1]
+        lm = np.load(landmark_path).transpose(1,0)[:,::-1]   # (y,x) it is different as dlib
 
     # lm = lm[:,::-1]
     lm_chin          = lm[0  : 17]  # left-right
@@ -89,15 +89,15 @@ def align_face(filepath, output_path, landmark_path = None ):
     # read image
     img = PIL.Image.open(filepath)
 
-    cv_img = cv2.imread(filepath)
-    cv_img =cv2.cvtColor(cv_img, cv2.COLOR_BGR2RGB)    
-    for kk in range(lm.shape[0]):
-        x = int(lm[kk][0])
-        y = int(lm[kk][1])
-        # print (x,y)
-        cv2.circle(cv_img, (y,x), 3, (0,0,255),3)
-    cv_img = cv2.cvtColor(cv_img, cv2.COLOR_RGB2BGR)
-    cv2.imwrite('gg.png',cv_img)
+    # cv_img = cv2.imread(filepath)
+    # cv_img =cv2.cvtColor(cv_img, cv2.COLOR_BGR2RGB)    
+    # for kk in range(lm.shape[0]):
+    #     x = int(lm[kk][0])
+    #     y = int(lm[kk][1])
+    #     # print (x,y)
+    #     cv2.circle(cv_img, (y,x), 3, (0,0,255),3)
+    # cv_img = cv2.cvtColor(cv_img, cv2.COLOR_RGB2BGR)
+    # cv2.imwrite('gg.png',cv_img)
 
     output_size=1024
     transform_size=4096
@@ -124,14 +124,9 @@ def align_face(filepath, output_path, landmark_path = None ):
     pad = (max(-pad[0] + border, 0), max(-pad[1] + border, 0), max(pad[2] - img.size[0] + border, 0), max(pad[3] - img.size[1] + border, 0))
     if enable_padding and max(pad) > border - 4:
         # print (img.shape)
-        kk =  np.array(img)
-        print (kk.shape)
-        cv2.imwrite('gg1.png',  kk)
+      
         pad = np.maximum(pad, int(np.rint(qsize * 0.3)))
-        print (pad)
         img = np.pad(np.float32(img), ((pad[1], pad[3]), (pad[0], pad[2]), (0,0)))
-        cv2.imwrite('gg.png', img)
-        print (img.shape)
         h, w, _ = img.shape
         
         y, x, _ = np.ogrid[:h, :w, :1]
