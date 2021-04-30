@@ -128,7 +128,6 @@ def  get_front_list():
 
     for id_idx in pids:
         
-        
         for exp_id in range(len(expressions)):
             angles = []
             exp_idx = exp_id + 1        
@@ -145,4 +144,32 @@ def  get_front_list():
             print (id_idx +',' + str(expressions[exp_idx]) + ',' + str(small_index[0])  )
             gg.write(id_idx +',' + str(expressions[exp_idx]) + ',' +str(small_index[0])  + '\n')
 
-get_front_list()
+
+def  get_valid_list():
+    # get_all_folder_example()
+    # exp_idx = 1
+    pids = os.listdir(image_data_root)
+    pids.sort()
+    gg =  open("./predef/validface_list.txt", 'w')
+
+    for id_idx in pids:
+        
+        for exp_id in range(len(expressions)):
+            angles = []
+            exp_idx = exp_id + 1        
+            print (os.path.join( image_data_root , id_idx, expressions[exp_idx]))
+            for cam_idx in range(len(os.listdir(os.path.join( image_data_root , id_idx, expressions[exp_idx]))) -1):
+                angle_x, angle_y, angle_z = get_face_orientation(int(id_idx), exp_idx, cam_idx)
+                angles.append([angle_x, angle_y, angle_z])
+                angles.append(angle_x)
+            angles = np.array(angles)
+            angle_max = angles.max(1)
+            small_index = angle_max.argsort()#[:3]
+            for kk in small_index:
+                print (kk, angles[kk])
+            # print (id_idx +',' + str(expressions[exp_idx]) + ',' + str(small_index[0])  )
+            # gg.write(id_idx +',' + str(expressions[exp_idx]) + ',' +str(small_index[0])  + '\n')
+
+get_valid_list()
+
+# get_front_list()
