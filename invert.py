@@ -93,7 +93,7 @@ def main_load_data():
     for i in range(len(img_names)):
       print  (img_path, img_names[i])
       # print (img_names[i])
-      img_p = os.path.join( img_path, img_names[i])
+      img_p = img_names[i]
       f.write(img_p +'\n')
       # if i == 5:
       #   break   
