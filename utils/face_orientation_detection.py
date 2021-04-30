@@ -122,6 +122,7 @@ def get_front_pickle():
 def  get_front_list():
     angle_lists =  open("./predef/angle_list.txt", 'r')
     total_list = {}
+    front_list = {}
     while True:
         line = angle_lists.readline()[:-1]
         if not line:
@@ -133,30 +134,24 @@ def  get_front_list():
         total_list[tmp[0] +'__' + tmp[1] + '__' + tmp[2]] = [float(tmp[3]),float(tmp[4]), float(tmp[5])]
     print (total_list)
 
-    
 
     pids = os.listdir(image_data_root)
     pids.sort()
-    gg =  open("./predef/frontface_list.txt", 'w')
-
     for id_idx in pids:
-        
         for exp_id in range(len(expressions)):
             angles = []
-            exp_idx = exp_id + 1        
-            print (os.path.join( image_data_root , id_idx, expressions[exp_idx]))
+            exp_idx = exp_id + 1
             for cam_idx in range(len(os.listdir(os.path.join( image_data_root , id_idx, expressions[exp_idx]))) -1):
-                angle_x, angle_y, angle_z = get_face_orientation(int(id_idx), exp_idx, cam_idx)
-                # angles.append([angle_x*10, angle_y, angle_z])
-                angles.append(angle_x)
+                name_key = str(id_idx) +'__' + expressions[exp_idx] +'__' + cam_idx
+                if name_key in total_list.keys():
+                    angles.append(total_list[name_key][0])
             angles = np.array(angles)
             angle_sum = angles.sum(1)
-            small_index = angle_sum.argsort()[:3]
-            for kk in small_index:
-                print (kk, angles[kk])
-            print (id_idx +',' + str(expressions[exp_idx]) + ',' + str(small_index[0])  )
-            gg.write(id_idx +',' + str(expressions[exp_idx]) + ',' +str(small_index[0])  + '\n')
-
+            small_index = angle_sum.argsort()[0]
+            front_list[str(id_idx) +'__' + expressions[exp_idx]] = [small_index]
+    print (front_list)
+    with open('./predef/frontface_list.pkl', 'wb') as handle:
+        pickle.dump(front_list, handle, protocol=pickle.HIGHEST_PROTOCOL)
 def get_valid_pickle():
     gg =  open("./predef/validface_list.txt", 'r')
     front_list = {}
