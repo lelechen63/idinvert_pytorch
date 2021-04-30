@@ -138,8 +138,10 @@ def  get_front_list():
                 angles.append([angle_x*2, angle_y, angle_z])
             angles = np.array(angles)
             angle_sum = angles.sum(1)
-            small_index = angle_sum.argsort()[0]
-            print (id_idx +',' + str(expressions[exp_idx]) + ',' + str(small_index)  )
-            gg.write(id_idx +',' + str(expressions[exp_idx]) + ',' +str(small_index)  + '\n')
+            small_index = angle_sum.argsort()[:3]
+            for gg in small_index:
+                print (gg, angles[gg])
+            print (id_idx +',' + str(expressions[exp_idx]) + ',' + str(small_index[0])  )
+            gg.write(id_idx +',' + str(expressions[exp_idx]) + ',' +str(small_index[0])  + '\n')
 
 get_front_list()
