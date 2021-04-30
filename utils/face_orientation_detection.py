@@ -144,7 +144,9 @@ def  get_front_list():
                 name_key = str(id_idx) +'__' + expressions[exp_idx] +'__' + str(cam_idx)
                 if name_key in total_list.keys():
                     angles.append([ 10 * total_list[name_key][0] ,total_list[name_key][1],total_list[name_key][2]] )
+            
             angles = np.array(angles)
+            print (angles.shape)
             angle_sum = angles.sum(1)
             small_index = angle_sum.argsort()[0]
             front_list[str(id_idx) +'__' + expressions[exp_idx]] = [small_index]
