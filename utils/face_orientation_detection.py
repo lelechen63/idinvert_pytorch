@@ -151,6 +151,7 @@ def  get_valid_list():
     pids = os.listdir(image_data_root)
     pids.sort()
     gg =  open("./predef/validface_list.txt", 'w')
+    angle_lists =  open("./predef/angle_list.txt", 'w')
 
     for id_idx in pids:
         
@@ -160,16 +161,20 @@ def  get_valid_list():
             print (os.path.join( image_data_root , id_idx, expressions[exp_idx]))
             for cam_idx in range(len(os.listdir(os.path.join( image_data_root , id_idx, expressions[exp_idx]))) -1):
                 angle_x, angle_y, angle_z = get_face_orientation(int(id_idx), exp_idx, cam_idx)
-                angles.append([angle_x, angle_y, angle_z])
+                angle_lists.write(id_idx +',' + str(expressions[exp_idx]) + ',' + cam_idx + ','  +  str(angle_x) + ','  +  str(angle_y)+ ','  +  str(angle_z) + '\n')
+                # angles.append([angle_x, angle_y, angle_z])
+                if angle_x < 90 and angle_y < 30 and angle_z < 90:
+                    print (id_idx +',' + str(expressions[exp_idx]) + ',' + cam_idx)
+                    gg.write(id_idx +',' + str(expressions[exp_idx]) + ',' + cam_idx  + '\n')
                 # angles.append(angle_x)
-            angles = np.array(angles)
+            # angles = np.array(angles)
             # angle_x_max = angles.max(:,0)
             # angle_y_max = angles.max(:,1)
             # angle_z_max = angles.max(:,2)
 
-            small_index = angle_max.argsort()#[:3]
-            for kk in small_index:
-                print (kk, angles[kk], angle_max[kk])
+            # small_index = angle_max.argsort()#[:3]
+            # for kk in small_index:
+            #     print (kk, angles[kk], angle_max[kk])
             # print (id_idx +',' + str(expressions[exp_idx]) + ',' + str(small_index[0])  )
             # gg.write(id_idx +',' + str(expressions[exp_idx]) + ',' +str(small_index[0])  + '\n')
 

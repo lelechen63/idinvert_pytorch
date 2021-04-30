@@ -228,23 +228,24 @@ def main_facescape_align(K):
             output_p = os.path.join( save_p2 ,front_idx + '.jpg')
             lmark_p = img_p.replace('fsmview_images', 'fsmview_landmarks')[:-3] +'npy'
 
+            #############################
             # debug
-            img_p = "/raid/celong/FaceScape/fsmview_images/1/1_neutral/1.jpg"
-            lmark_p = "/raid/celong/FaceScape/fsmview_landmarks/1/1_neutral/1.npy"
-            output_p = "/raid/celong/FaceScape/ffhq_aligned_img/1/1_neutral/1.png"
-
-
+            # img_p = "/raid/celong/FaceScape/fsmview_images/1/1_neutral/15.jpg"
+            # lmark_p = "/raid/celong/FaceScape/fsmview_landmarks/1/1_neutral/15.npy"
+            # output_p = "/raid/celong/FaceScape/ffhq_aligned_img/1/1_neutral/15.png"
             # if os.path.exists(output_p):
             #     continue
-            align_face(img_p, output_p, lmark_p)
-            print (output_p)
-            # try:
-            #     # align_face(img_p, output_p)
-            #     align_face(img_p, output_p, lmark_p)
-            #     print (output_p)
-            # except:
-            #     continue
-            print (gg)
+            # align_face(img_p, output_p, lmark_p)
+            # print (output_p)
+            #############################
+
+            try:
+                # align_face(img_p, output_p)
+                align_face(img_p, output_p, lmark_p)
+                print (output_p)
+            except:
+                continue
+            # print (gg)
             #     aligned_img = cv2.imread(img_p.replace( 'original', 'aligned'))
             #     aligned_img = cv2.cvtColor(aligned_img, cv2.COLOR_RGB2BGR)
             #     gt_imgs.append(preprocess(aligned_img))
