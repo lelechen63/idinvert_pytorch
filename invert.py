@@ -85,7 +85,7 @@ def main_load_data():
               # print (id_p +'__' + motion_p)
             valid_idxs = valid_all[id_p +'__' + motion_p]
             for valid_f in valid_idxs:
-              img_path = os.path.join( current_p1, valid_f + '.jpg')
+              img_path = os.path.join( current_p1, str(valid_f) + '.jpg')
               img_names.append(img_path)
               print (img_path)
             # except:
