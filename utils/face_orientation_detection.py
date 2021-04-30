@@ -161,7 +161,7 @@ def  get_valid_list():
             for cam_idx in range(len(os.listdir(os.path.join( image_data_root , id_idx, expressions[exp_idx]))) -1):
                 angle_x, angle_y, angle_z = get_face_orientation(int(id_idx), exp_idx, cam_idx)
                 angles.append([angle_x, angle_y, angle_z])
-                angles.append(angle_x)
+                # angles.append(angle_x)
             angles = np.array(angles)
             angle_max = angles.max(1)
             small_index = angle_max.argsort()#[:3]
