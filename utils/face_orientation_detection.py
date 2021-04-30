@@ -155,7 +155,10 @@ def get_valid_pickle():
         tmp = line.split(',')
         print (tmp)
         print(tmp[0], tmp[1])
-        front_list[tmp[0] + '__' + tmp[1] ] = tmp[2]
+        if tmp[0] + '__' + tmp[1] not in front_list.keys():
+            front_list[tmp[0] + '__' + tmp[1] ] = [tmp[2]]
+        else:
+            front_list[tmp[0] + '__' + tmp[1] ].append(tmp[2])
     with open('./predef/validface_list.pkl', 'wb') as handle:
         pickle.dump(front_list, handle, protocol=pickle.HIGHEST_PROTOCOL)
 

@@ -204,7 +204,7 @@ def main_facescape_align(K):
         os.mkdir(base_p.replace('fsmview_images', 'ffhq_aligned_img'))
     save_p = base_p.replace('fsmview_images', 'ffhq_aligned_img')
 
-    _file = open( './predef/frontface_list.pkl', "rb")
+    _file = open( './predef/validface_list.pkl', "rb")
     front_indx = pickle.load(_file)
 
     ids =  os.listdir(base_p)
