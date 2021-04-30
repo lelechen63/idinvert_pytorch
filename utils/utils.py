@@ -229,7 +229,7 @@ def main_facescape_align(K):
 
             # debug
             img_p = "/raid/celong/FaceScape/fsmview_images/1/1_neutral/15.jpg"
-            lmark_path = "/raid/celong/FaceScape/fsmview_landmarks/1/1_neutral/15.npy"
+            lmark_p = "/raid/celong/FaceScape/fsmview_landmarks/1/1_neutral/15.npy"
             output_p = "/raid/celong/FaceScape/ffhq_aligned_img/1/1_neutral/15.png"
 
 
