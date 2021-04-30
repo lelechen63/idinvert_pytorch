@@ -121,19 +121,18 @@ def get_front_list():
 # get_front_list()
 def  main():
     # get_all_folder_example()
-    exp_idx = 1
+    # exp_idx = 1
     pids = os.listdir(image_data_root)
     pids.sort()
     gg =  open("./predef/frontface_list.txt", 'w')
 
     for id_idx in pids:
-        if not os.path.exists( os.path.join( "/raid/celong/FaceScape/tmp" , id_idx) ):
-            os.mkdir(os.path.join( "/raid/celong/FaceScape/tmp" , id_idx))
+        
         angles = []
         for exp_id in range(len(expressions)):
-                
-            print (os.path.join( image_data_root , id_idx, expressions[exp_id]))
-            for cam_idx in range(len(os.listdir(os.path.join( image_data_root , id_idx, expressions[exp_id]))) -1):
+            exp_idx = exp_id + 1        
+            print (os.path.join( image_data_root , id_idx, expressions[exp_idx]))
+            for cam_idx in range(len(os.listdir(os.path.join( image_data_root , id_idx, expressions[exp_idx]))) -1):
                 angle_x, angle_y, angle_z = get_face_orientation(int(id_idx), exp_idx, cam_idx)
                 angles.append([angle_x, angle_y, angle_z])
             angles = np.array(angles)
