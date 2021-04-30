@@ -245,12 +245,12 @@ def main_facescape_render_align(K):
             # img_names = os.listdir(current_p1)
             # img_names.sort()
             # for i in range(len(img_names)):
-            img_p = os.path.join( current_p1, front_idx + '.jpg')
-            output_p = os.path.join( save_p2 ,front_idx + '_render.jpg')
+            img_p = os.path.join( current_p1, front_idx + '.png')
+            output_p = os.path.join( save_p2 ,front_idx + '_render.png')
             lmark_p = img_p.replace('fsmview_renderings', 'fsmview_landmarks')[:-3] +'npy'
 
             # debug
-            img_p = "/raid/celong/FaceScape/fsmview_renderings/1/9_mouth_right/1.jpg"
+            img_p = "/raid/celong/FaceScape/fsmview_renderings/1/9_mouth_right/1.png"
             lmark_path = "/raid/celong/FaceScape/fsmview_landmarks/1/9_mouth_right/1.npy"
             output_p = "/raid/celong/FaceScape/ffhq_aligned_img/1/9_mouth_right/1_render.png"
 
