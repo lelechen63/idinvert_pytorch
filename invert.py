@@ -154,7 +154,8 @@ def main(image_list = None):
     try:
       image = load_image(image_path)
       mask = cv2.imread(mask_path)
-      print (mask.shape, image.shape)
+      print (mask.max(), max.min())
+      print (image_path)
       image = image * mask 
       image = resize_image(image, (image_size, image_size))
       code, viz_results = inverter.easy_invert(image, num_viz=args.num_results)
