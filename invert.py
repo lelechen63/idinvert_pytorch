@@ -70,7 +70,7 @@ def load_data():
 def main_load_data():
     """ load the video data"""
     base_p = '/raid/celong/FaceScape/ffhq_aligned_img'
-    _file = open( '/raid/celong/lele/github/idinvert_pytorch/predef/validface_list.pkl', "rb")
+    _file = open( '/raid/celong/lele/github/idinvert_pytorch/predef/frontface_list.pkl', "rb")
     valid_all = pickle.load(_file)
     ids =  os.listdir(base_p)
     ids.sort()
