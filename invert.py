@@ -86,7 +86,9 @@ def main_load_data():
               for valid_f in valid_idxs:
                 img_path = os.path.join( current_p1, valid_f + '.jpg')
                 img_names.append(img_path)
+                print (img_path)
             except:
+              
               continue
     img_names.sort()
     f = open( os.path.join('/raid/celong/FaceScape', 'lists', 'inversion.txt'),'w')
