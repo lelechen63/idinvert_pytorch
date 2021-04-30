@@ -54,7 +54,7 @@ def align_face(filepath, output_path, landmark_path = None ):
     if landmark_path is None:
         lm = get_landmark(filepath)
     else:
-        lm = np.load(landmark_path).transpose(1,0)
+        lm = np.load(landmark_path).transpose(1,0)[:,::-1]
 
     lm_chin          = lm[0  : 17]  # left-right
     lm_eyebrow_left  = lm[17 : 22]  # left-right
@@ -88,17 +88,15 @@ def align_face(filepath, output_path, landmark_path = None ):
     # read image
     img = PIL.Image.open(filepath)
 
-    # cv_img = cv2.imread(filepath)
-    # cv_img =cv2.cvtColor(cv_img, cv2.COLOR_BGR2RGB)    
-    # for kk in range(lm.shape[0]):
-    #     x = int(lm[kk][0])
-    #     y = int(lm[kk][1])
-    #     # print (x,y)
-
-    #     cv2.circle(cv_img, (y,x), 3, (0,0,255),3)
-    # cv_img = cv2.cvtColor(cv_img, cv2.COLOR_RGB2BGR)
-
-    # cv2.imwrite('gg.png',cv_img)
+    cv_img = cv2.imread(filepath)
+    cv_img =cv2.cvtColor(cv_img, cv2.COLOR_BGR2RGB)    
+    for kk in range(lm.shape[0]):
+        x = int(lm[kk][0])
+        y = int(lm[kk][1])
+        # print (x,y)
+        cv2.circle(cv_img, (y,x), 3, (0,0,255),3)
+    cv_img = cv2.cvtColor(cv_img, cv2.COLOR_RGB2BGR)
+    cv2.imwrite('gg.png',cv_img)
 
     output_size=1024
     transform_size=4096
