@@ -129,7 +129,7 @@ def align_face(filepath, output_path, landmark_path = None ):
         cv2.imwrite('gg1.png',  kk)
         pad = np.maximum(pad, int(np.rint(qsize * 0.3)))
         print (pad)
-        img = np.pad(np.float32(img), ((pad[1], pad[3]), (pad[0], pad[2])), 'constant', (0, 0))
+        img = np.pad(np.float32(img), ((pad[1], pad[3]), (pad[0], pad[2])), 'constant')
         cv2.imwrite('gg.png', img)
         print (img.shape)
         h, w, _ = img.shape
