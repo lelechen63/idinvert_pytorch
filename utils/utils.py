@@ -93,6 +93,7 @@ def align_face(filepath, output_path, landmark_path = None ):
     #[..., ::-1]
 
     print (cv_img.shape, lm.shape)
+    lm = lm[:,::-1]
 
     # lm[:,0] = cv_img.shape[0] - lm[:,0]
     # lm[:,1] = cv_img.shape[1] - lm[:,1]
