@@ -115,7 +115,7 @@ def get_front_pickle():
         tmp = line.split(',')
         print (tmp)
         print(tmp[0], tmp[1])
-        front_list[tmp[0]] = tmp[1]
+        front_list[tmp[0] +'__' + tmp[1]] = tmp[2]
     with open('./predef/frontface_list.pkl', 'wb') as handle:
         pickle.dump(front_list, handle, protocol=pickle.HIGHEST_PROTOCOL)
 # get_front_list()
@@ -144,6 +144,20 @@ def  get_front_list():
             print (id_idx +',' + str(expressions[exp_idx]) + ',' + str(small_index[0])  )
             gg.write(id_idx +',' + str(expressions[exp_idx]) + ',' +str(small_index[0])  + '\n')
 
+def get_valid_pickle():
+    gg =  open("./predef/validface_list.txt", 'r')
+    front_list = {}
+    while True:
+        line = gg.readline()[:-1]
+        if not line:
+            break
+        print(line)
+        tmp = line.split(',')
+        print (tmp)
+        print(tmp[0], tmp[1])
+        front_list[tmp[0] + '__' + tmp[1] ] = tmp[2]
+    with open('./predef/validface_list.pkl', 'wb') as handle:
+        pickle.dump(front_list, handle, protocol=pickle.HIGHEST_PROTOCOL)
 
 def  get_valid_list():
     # get_all_folder_example()
@@ -180,6 +194,6 @@ def  get_valid_list():
             # print (id_idx +',' + str(expressions[exp_idx]) + ',' + str(small_index[0])  )
             # gg.write(id_idx +',' + str(expressions[exp_idx]) + ',' +str(small_index[0])  + '\n')
 
-get_valid_list()
+get_valid_pickle()
 
 # get_front_list()
