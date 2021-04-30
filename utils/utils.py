@@ -214,6 +214,8 @@ def main_facescape_align(K):
 
             # if os.path.exists(output_p):
             #     continue
+            align_face(img_p, output_p, lmark_p)
+            print (output_p)
             try:
                 # align_face(img_p, output_p)
                 align_face(img_p, output_p, lmark_p)
