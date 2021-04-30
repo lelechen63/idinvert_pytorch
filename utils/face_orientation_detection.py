@@ -143,7 +143,7 @@ def  get_front_list():
             for cam_idx in range(len(os.listdir(os.path.join( image_data_root , id_idx, expressions[exp_idx]))) -1):
                 name_key = str(id_idx) +'__' + expressions[exp_idx] +'__' + str(cam_idx)
                 if name_key in total_list.keys():
-                    angles.append(total_list[name_key][0])
+                    angles.append([ 10 * total_list[name_key][0] ,total_list[name_key][1],total_list[name_key][2] )
             angles = np.array(angles)
             angle_sum = angles.sum(1)
             small_index = angle_sum.argsort()[0]
