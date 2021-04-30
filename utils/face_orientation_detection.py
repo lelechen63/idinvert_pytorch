@@ -104,7 +104,7 @@ def get_all_folder_example():
         print (command)
         os.system(command)
 
-def get_front_list():
+def get_front_pickle():
     gg =  open("./predef/frontface_list.txt", 'r')
     front_list = {}
     while True:
@@ -119,7 +119,7 @@ def get_front_list():
     with open('./predef/frontface_list.pkl', 'wb') as handle:
         pickle.dump(front_list, handle, protocol=pickle.HIGHEST_PROTOCOL)
 # get_front_list()
-def  main():
+def  get_front_list():
     # get_all_folder_example()
     # exp_idx = 1
     pids = os.listdir(image_data_root)
@@ -135,24 +135,11 @@ def  main():
             print (os.path.join( image_data_root , id_idx, expressions[exp_idx]))
             for cam_idx in range(len(os.listdir(os.path.join( image_data_root , id_idx, expressions[exp_idx]))) -1):
                 angle_x, angle_y, angle_z = get_face_orientation(int(id_idx), exp_idx, cam_idx)
-                angles.append([angle_x, angle_y, angle_z])
+                angles.append([angle_x*2, angle_y, angle_z])
             angles = np.array(angles)
             angle_sum = angles.sum(1)
             small_index = angle_sum.argsort()[0]
             print (id_idx +',' + str(expressions[exp_idx]) + ',' + str(small_index)  )
             gg.write(id_idx +',' + str(expressions[exp_idx]) + ',' +str(small_index)  + '\n')
-            # for indx in small_index:
-            #     print (indx, angle_sum[indx])
-            #     gg.write(',' +  str(indx) )
-                # img_path = os.path.join( image_data_root , id_idx, expressions[exp_id],  str(indx) + ".jpg" )
-                # target_path =  os.path.join( "/raid/celong/FaceScape/tmp" , id_idx,str(indx) + ".jpg"  )
 
-                # command = 'cp ' + img_path + ' ' + target_path
-                # os.system(command)
-                # print (img_path)
-            # gg.write('\n')
-        # break
-    # img_path = f"{img_dir}/{cam_idx}.jpg"
-    # print (img_path)
-    # os.system(f"cp {img_path} tmp/")
-main()
+get_front_list()
