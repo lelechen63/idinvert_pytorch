@@ -146,11 +146,16 @@ def main(image_list = None):
   for img_idx in tqdm(range(len(img_list)), leave=False):
     image_path = img_list[img_idx]
     image_name = image_path.split('/')[-3] +'__' + image_path.split('/')[-2] + '__' +image_path.split('/')[-1][:-4]
+    mask_path = image_path[:-4] +'_mask.png'
     # if  os.path.exists (image_path[:-3] +  'npy'):
     #   print (image_path[:-3] +  'npy')
     #   print ('!!!')
       # continue
     try:
+      image = load_image(image_path)
+      mask = cv2.imread(mask_path)
+      print (mask.shape, image.shape)
+      image = image * mask 
       image = resize_image(load_image(image_path), (image_size, image_size))
       code, viz_results = inverter.easy_invert(image, num_viz=args.num_results)
       latent_codes.append(code)
