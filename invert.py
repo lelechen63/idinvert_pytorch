@@ -91,10 +91,12 @@ def main_load_data():
     print (len(img_names))
     f = open( os.path.join('/raid/celong/FaceScape', 'lists', 'inversion.txt'),'w')
     for i in range(len(img_names)):
-        img_p = os.path.join( img_path, img_names[i])
-        f.write(img_p +'\n')
-        # if i == 5:
-        #   break   
+      print  (img_path)
+      print (img_names[i])
+      img_p = os.path.join( img_path, img_names[i])
+      f.write(img_p +'\n')
+      # if i == 5:
+      #   break   
     f.close
     return  os.path.join('/raid/celong/FaceScape', 'lists', 'inversion.txt')
 
