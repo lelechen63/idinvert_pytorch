@@ -134,7 +134,6 @@ def  get_front_list():
         total_list[tmp[0] +'__' + tmp[1] + '__' + tmp[2]] = [float(tmp[3]),float(tmp[4]), float(tmp[5])]
     print (total_list)
 
-
     pids = os.listdir(image_data_root)
     pids.sort()
     for id_idx in pids:
@@ -142,7 +141,7 @@ def  get_front_list():
             angles = []
             exp_idx = exp_id + 1
             for cam_idx in range(len(os.listdir(os.path.join( image_data_root , id_idx, expressions[exp_idx]))) -1):
-                name_key = str(id_idx) +'__' + expressions[exp_idx] +'__' + cam_idx
+                name_key = str(id_idx) +'__' + expressions[exp_idx] +'__' + str(cam_idx)
                 if name_key in total_list.keys():
                     angles.append(total_list[name_key][0])
             angles = np.array(angles)
