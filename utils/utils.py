@@ -88,7 +88,7 @@ def align_face(filepath, output_path, landmark_path = None ):
     # read image
     img = PIL.Image.open(filepath)
 
-    cv_img = cv2.imread(filepath[..., ::-1]
+    cv_img = cv2.imread(filepath)[..., ::-1]
 
     print (cv_img.shape, lm.shape)
 
