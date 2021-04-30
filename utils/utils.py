@@ -253,7 +253,6 @@ def main_facescape_render_align(K):
     for id_p in ids[K * 5: (K + 1) * 5]:
         current_p = os.path.join( base_p , id_p)
         save_p1 = os.path.join( save_p , id_p)
-        front_idx = front_indx[id_p]
         if not os.path.exists(  os.path.join( save_p1 ) ):
             os.mkdir( save_p1 ) 
         for motion_p in os.listdir(current_p):
