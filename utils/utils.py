@@ -14,6 +14,8 @@ import pickle
 
 # download model from: http://dlib.net/files/shape_predictor_68_face_landmarks.dat.bz2
 # predictor = dlib.shape_predictor('/u/lchen63/github/genforce/utils/shape_predictor_68_face_landmarks.dat')
+fa = face_alignment.FaceAlignment(face_alignment.LandmarksType._2D, flip_input=False)
+
 predictor = dlib.shape_predictor('/raid/celong/lele/github/idinvert_pytorch/utils/shape_predictor_68_face_landmarks.dat')
 def get_landmark(filepath):
     """get landmark with dlib
@@ -86,9 +88,11 @@ def align_face(filepath, output_path, landmark_path = None ):
     # read image
     img = PIL.Image.open(filepath)
 
-    cv_img = np.array(img)#[..., ::-1]
+    cv_img = cv2.imread(filepath[..., ::-1]
+
     print (cv_img.shape, lm.shape)
-    lm[:,0] = cv_img.shape[0] - lm[:,0]
+
+    # lm[:,0] = cv_img.shape[0] - lm[:,0]
     # lm[:,1] = cv_img.shape[1] - lm[:,1]
     
     for kk in range(lm.shape[0]):
