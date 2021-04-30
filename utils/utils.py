@@ -250,20 +250,18 @@ def main_facescape_render_align(K):
             lmark_p = img_p.replace('fsmview_renderings', 'fsmview_landmarks')[:-3] +'npy'
 
             # debug
-            img_p = "/raid/celong/FaceScape/fsmview_renderings/1/9_mouth_right/1.png"
-            lmark_path = "/raid/celong/FaceScape/fsmview_landmarks/1/9_mouth_right/1.npy"
-            output_p = "/raid/celong/FaceScape/ffhq_aligned_img/1/9_mouth_right/1_render.png"
+            # img_p = "/raid/celong/FaceScape/fsmview_renderings/1/9_mouth_right/1.png"
+            # lmark_path = "/raid/celong/FaceScape/fsmview_landmarks/1/9_mouth_right/1.npy"
+            # output_p = "/raid/celong/FaceScape/ffhq_aligned_img/1/9_mouth_right/1_render.png"
 
-
-            # if os.path.exists(output_p):
-            #     continue
-            # try:
+            try:
                 # align_face(img_p, output_p)
-            align_face(img_p, output_p, lmark_p)
-            print (output_p)
-            break
-            # except:
-            #     continue
+                align_face(img_p, output_p, lmark_p)
+                print (output_p)
+            # break
+            except:
+                print (output_p，'+++++')
+                continue
             #     aligned_img = cv2.imread(img_p.replace( 'original', 'aligned'))
             #     aligned_img = cv2.cvtColor(aligned_img, cv2.COLOR_RGB2BGR)
             #     gt_imgs.append(preprocess(aligned_img))
