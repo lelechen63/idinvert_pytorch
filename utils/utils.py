@@ -205,7 +205,7 @@ def main_facescape_align(K):
     save_p = base_p.replace('fsmview_images', 'ffhq_aligned_img')
 
     _file = open( './predef/validface_list.pkl', "rb")
-    valid_indx = pickle.load(_file)
+    valid_all = pickle.load(_file)
 
     ids =  os.listdir(base_p)
     ids.sort()
@@ -221,7 +221,7 @@ def main_facescape_align(K):
             save_p2 = os.path.join( save_p1 , motion_p)
             if not os.path.exists(  os.path.join( save_p2 ) ):
                 os.mkdir( save_p2 ) 
-            valid_idxs = front_indx[id_p +'__' + motion_p]
+            valid_idxs = valid_all[id_p +'__' + motion_p]
             for valid_f in valid_idxs:
             # img_names = os.listdir(current_p1)
             # img_names.sort()
