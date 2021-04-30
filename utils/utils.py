@@ -123,9 +123,15 @@ def align_face(filepath, output_path, landmark_path = None ):
     pad = (int(np.floor(min(quad[:,0]))), int(np.floor(min(quad[:,1]))), int(np.ceil(max(quad[:,0]))), int(np.ceil(max(quad[:,1]))))
     pad = (max(-pad[0] + border, 0), max(-pad[1] + border, 0), max(pad[2] - img.size[0] + border, 0), max(pad[3] - img.size[1] + border, 0))
     if enable_padding and max(pad) > border - 4:
+        print (img.shape)
+        cv2.imwrite('gg1.png')
         pad = np.maximum(pad, int(np.rint(qsize * 0.3)))
+        
         img = np.pad(np.float32(img), ((pad[1], pad[3]), (pad[0], pad[2]), (0, 0)), 'reflect')
+        cv2.imwrite('gg.png')
+        print (img.shape)
         h, w, _ = img.shape
+        
         y, x, _ = np.ogrid[:h, :w, :1]
         mask = np.maximum(1.0 - np.minimum(np.float32(x) / pad[0], np.float32(w-1-x) / pad[2]), 1.0 - np.minimum(np.float32(y) / pad[1], np.float32(h-1-y) / pad[3]))
         blur = qsize * 0.02
