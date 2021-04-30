@@ -82,7 +82,7 @@ def main_load_data():
         for motion_p in os.listdir(current_p):
             current_p1 = os.path.join( current_p , motion_p)
             try:
-              print (id_p +'__' + motion_p)
+              # print (id_p +'__' + motion_p)
               valid_idxs = valid_all[id_p +'__' + motion_p]
               for valid_f in valid_idxs:
                 img_path = os.path.join( current_p1, valid_f + '.jpg')
