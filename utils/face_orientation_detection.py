@@ -161,7 +161,7 @@ def  get_valid_list():
             print (os.path.join( image_data_root , id_idx, expressions[exp_idx]))
             for cam_idx in range(len(os.listdir(os.path.join( image_data_root , id_idx, expressions[exp_idx]))) -1):
                 angle_x, angle_y, angle_z = get_face_orientation(int(id_idx), exp_idx, cam_idx)
-                angle_lists.write(id_idx +',' + str(expressions[exp_idx]) + ',' + cam_idx + ','  +  str(angle_x) + ','  +  str(angle_y)+ ','  +  str(angle_z) + '\n')
+                angle_lists.write(id_idx +',' + str(expressions[exp_idx]) + ',' + str(cam_idx) + ','  +  str(angle_x) + ','  +  str(angle_y)+ ','  +  str(angle_z) + '\n')
                 # angles.append([angle_x, angle_y, angle_z])
                 if angle_x < 90 and angle_y < 30 and angle_z < 90:
                     print (id_idx +',' + str(expressions[exp_idx]) + ',' + cam_idx)
