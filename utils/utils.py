@@ -88,6 +88,9 @@ def align_face(filepath, output_path, landmark_path = None ):
 
     cv_img = np.array(img)#[..., ::-1]
     print (cv_img.shape, lm.shape)
+    lm[:,0] = cv_img.shape[0] - lm[:,0]
+    lm[:,1] = cv_img.shape[1] - lm[:,1]
+    
     for kk in range(lm.shape[0]):
         x = int(lm[kk][0])
         y = int(lm[kk][1])
