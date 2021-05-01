@@ -242,15 +242,13 @@ def main_facescape_align(K):
 
 def main_facescape_render_align(K):
     base_p = '/raid/celong/FaceScape/fsmview_renderings'
-   
     save_p = base_p.replace('fsmview_renderings', 'ffhq_aligned_img')
-
     _file = open( './predef/validface_list.pkl', "rb")
     valid_all = pickle.load(_file)
     ids =  os.listdir(base_p)
     ids.sort()
 
-    for id_p in ids[K * 5: (K + 1) * 5]:
+    for id_p in ids:#[K * 5: (K + 1) * 5]:
         current_p = os.path.join( base_p , id_p)
         save_p1 = os.path.join( save_p , id_p)
         if not os.path.exists(  os.path.join( save_p1 ) ):
@@ -264,11 +262,17 @@ def main_facescape_render_align(K):
             # img_p = "/raid/celong/FaceScape/fsmview_renderings/1/9_mouth_right/1.png"
             # lmark_path = "/raid/celong/FaceScape/fsmview_landmarks/1/9_mouth_right/1.npy"
             # output_p = "/raid/celong/FaceScape/ffhq_aligned_img/1/9_mouth_right/1_render.png"
+            if id_p +'__' + motion_p not in valid_all.keys:
+                print (id_p +'__' + motion_p,'+++++')
+                continue
             
             valid_idxs = valid_all[id_p +'__' + motion_p]
             for valid_f in valid_idxs:
                 img_p = os.path.join( current_p1, valid_f + '.png')
                 output_p = os.path.join( save_p2 ,valid_f + '_render.png')
+                if os.path.exists(output_p):
+                    print (output_p,'-------')
+                    continue
                 lmark_p = img_p.replace('fsmview_renderings', 'fsmview_landmarks')[:-3] +'npy'
                 try:
                     align_face(img_p, output_p, lmark_p)
