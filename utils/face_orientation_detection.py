@@ -199,7 +199,7 @@ def  get_angle_list():
     for i in range (N):
         angle_lists =  open("./predef/tmmp/angle_list_%d.txt"%i, 'w')
         print ('!!!!!')
-        threading.Thread(target = get_angle_batch(pids[batch * i: batch *(i+1)], i), name ='ggg%d'%i).start()
+        threading.Thread(target = get_angle_batch, args = (pids[batch * i: batch *(i+1)], i)).start()
         
     #     threads.append(threading.Thread(target = get_angle_batch(pids[batch * i: batch *(i+1)], i), name ='ggg%d'%i))
     #             # angles.append([angle_x, angle_y, angle_z])
