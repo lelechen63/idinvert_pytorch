@@ -318,7 +318,7 @@ def parse_args():
 config = parse_args()
 
 for k in range(70):
-    main_facescape_render_align(config.k)
+    # main_facescape_render_align(config.k)
     threading.Thread(target = main_facescape_render_align, args = (k,)).start()
     threading.Thread(target = main_facescape_align, args = (k,)).start()
 
