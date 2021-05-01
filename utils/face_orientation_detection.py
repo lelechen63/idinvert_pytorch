@@ -173,8 +173,7 @@ def get_valid_pickle():
         pickle.dump(front_list, handle, protocol=pickle.HIGHEST_PROTOCOL)
 
 def  get_valid_list():
-    # get_all_folder_example()
-    # exp_idx = 1
+  
     pids = os.listdir(image_data_root)
     pids.sort()
     gg =  open("./predef/validface_list.txt", 'w')
@@ -207,6 +206,7 @@ def  get_valid_list():
             # print (id_idx +',' + str(expressions[exp_idx]) + ',' + str(small_index[0])  )
             # gg.write(id_idx +',' + str(expressions[exp_idx]) + ',' +str(small_index[0])  + '\n')
 
-# get_valid_pickle()
+get_valid_list()
+get_valid_pickle()
 
-get_front_list()
+# get_front_list()
