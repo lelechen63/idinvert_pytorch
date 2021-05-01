@@ -177,7 +177,7 @@ def get_valid_pickle():
             for cam_idx in range(len(os.listdir(os.path.join( image_data_root , id_idx, expressions[exp_idx]))) -1):
                 name_key = str(id_idx) +'__' + expressions[exp_idx] +'__' + str(cam_idx)
                 if name_key in total_list.keys():
-                    if 
+                    # if 
                     angles.append([ total_list[name_key][0] ,total_list[name_key][1],total_list[name_key][2]] )
 
     while True:
