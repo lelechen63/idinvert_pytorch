@@ -208,9 +208,9 @@ def get_angle_batch(pid_b, i):
                 angle_lists.append(id_idx +',' + str(expressions[exp_idx]) + ',' + str(cam_idx) + ','  +  str(angle_x) + ','  +  str(angle_y)+ ','  +  str(angle_z) + '\n')
                 print (id_idx +',' + str(expressions[exp_idx]) + ',' + str(cam_idx) + ','  +  str(angle_x) + ','  +  str(angle_y)+ ','  +  str(angle_z))
                 print (i)
-                break
-            break
-        break
+        #         break
+        #     break
+        # break
     print ('!!!!!!!!!!!!!!!!!!')
     with open('./predef/tmmp/angle_list_%d.pkl'% i, 'wb') as handle:
         pickle.dump(angle_lists, handle, protocol=pickle.HIGHEST_PROTOCOL)
