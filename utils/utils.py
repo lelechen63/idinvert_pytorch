@@ -11,6 +11,7 @@ import numpy as np
 import time 
 import argparse
 import pickle
+import time, threading
 
 # download model from: http://dlib.net/files/shape_predictor_68_face_landmarks.dat.bz2
 # predictor = dlib.shape_predictor('/u/lchen63/github/genforce/utils/shape_predictor_68_face_landmarks.dat')
@@ -198,13 +199,13 @@ def main_facescape_align(K):
         os.mkdir(base_p.replace('fsmview_images', 'ffhq_aligned_img'))
     save_p = base_p.replace('fsmview_images', 'ffhq_aligned_img')
 
-    _file = open( './predef/validface_list.pkl', "rb")
-    valid_all = pickle.load(_file)
+    # _file = open( './predef/validface_list.pkl', "rb")
+    # valid_all = pickle.load(_file)
 
     ids =  os.listdir(base_p)
     ids.sort()
     print (len(ids))
-    for id_p in ids[K * 10: (K + 1) * 10]:
+    for id_p in ids[K * 5: (K + 1) * 5]:
         current_p = os.path.join( base_p , id_p)
         save_p1 = os.path.join( save_p , id_p)
         
@@ -215,12 +216,16 @@ def main_facescape_align(K):
             save_p2 = os.path.join( save_p1 , motion_p)
             if not os.path.exists(  os.path.join( save_p2 ) ):
                 os.mkdir( save_p2 ) 
-            valid_idxs = valid_all[id_p +'__' + motion_p]
-            for valid_f in valid_idxs:
+            # valid_idxs = valid_all[id_p +'__' + motion_p]
+            # for valid_f in valid_idxs:
+            for valid_f in range( len(os.path.listdir(  current_p1  ))):
                 img_p = os.path.join( current_p1, valid_f + '.jpg')
                 output_p = os.path.join( save_p2 ,valid_f + '.jpg')
                 lmark_p = img_p.replace('fsmview_images', 'fsmview_landmarks')[:-3] +'npy'
 
+                if os.path.exists(output_p):
+                    print (output_p,'-------')
+                    continue
             #############################
             # debug
             # img_p = "/raid/celong/FaceScape/fsmview_images/1/1_neutral/15.jpg"
@@ -247,8 +252,7 @@ def main_facescape_render_align(K):
     valid_all = pickle.load(_file)
     ids =  os.listdir(base_p)
     ids.sort()
-
-    for id_p in ids:#[K * 5: (K + 1) * 5]:
+    for id_p in ids[K * 5: (K + 1) * 5]:
         current_p = os.path.join( base_p , id_p)
         save_p1 = os.path.join( save_p , id_p)
         if not os.path.exists(  os.path.join( save_p1 ) ):
@@ -262,12 +266,12 @@ def main_facescape_render_align(K):
             # img_p = "/raid/celong/FaceScape/fsmview_renderings/1/9_mouth_right/1.png"
             # lmark_path = "/raid/celong/FaceScape/fsmview_landmarks/1/9_mouth_right/1.npy"
             # output_p = "/raid/celong/FaceScape/ffhq_aligned_img/1/9_mouth_right/1_render.png"
-            if id_p +'__' + motion_p not in valid_all.keys():
-                print (id_p +'__' + motion_p,'+++++')
-                continue
-            
-            valid_idxs = valid_all[id_p +'__' + motion_p]
-            for valid_f in valid_idxs:
+            # if id_p +'__' + motion_p not in valid_all.keys():
+            #     print (id_p +'__' + motion_p,'+++++')
+            #     continue
+            # valid_idxs = valid_all[id_p +'__' + motion_p]
+            # for valid_f in valid_idxs:
+            for valid_f in range( len(os.path.listdir(  current_p1  ))):
                 img_p = os.path.join( current_p1, valid_f + '.png')
                 output_p = os.path.join( save_p2 ,valid_f + '_render.png')
                 if os.path.exists(output_p):
@@ -310,6 +314,10 @@ def parse_args():
     return parser.parse_args()
 config = parse_args()
 
-main_facescape_render_align(config.k)
+for k in range(70):
+    main_facescape_render_align(config.k)
+    threading.Thread(target = main_facescape_render_align, args = (k)).start()
+    threading.Thread(target = main_facescape_align, args = (k)).start()
+
 # trans_video_to_imgs( '/raid/celong/mead/tmp/001.mp4', '/raid/celong/mead/tmp/001', write_img = True )
 # trans_video_to_imgs( '/home/cxu-serve/p1/lchen63/nerf/data/mead/001.mp4', '/home/cxu-serve/p1/lchen63/nerf/data/mead/001/original', write_img = True )
