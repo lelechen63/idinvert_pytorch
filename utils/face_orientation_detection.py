@@ -196,17 +196,22 @@ def get_valid_pickle():
         pickle.dump(front_list, handle, protocol=pickle.HIGHEST_PROTOCOL)
 
 def get_angle_batch(pid_b, i):
-    angle_lists =  open("./predef/tmmp/angle_list_%d.txt"% i, 'w')
+    # angle_lists =  open("./predef/tmmp/angle_list_%d.txt"% i, 'w')
+    angle_lists = []
     for id_idx in pid_b:
         for exp_id in range(len(expressions)):
             angles = []
             exp_idx = exp_id + 1        
             for cam_idx in range(len(os.listdir(os.path.join( image_data_root , id_idx, expressions[exp_idx]))) -1):
                 angle_x, angle_y, angle_z = get_face_orientation(int(id_idx), exp_idx, cam_idx)
-                angle_lists.write(id_idx +',' + str(expressions[exp_idx]) + ',' + str(cam_idx) + ','  +  str(angle_x) + ','  +  str(angle_y)+ ','  +  str(angle_z) + '\n')
+                
+                angle_lists.append(id_idx +',' + str(expressions[exp_idx]) + ',' + str(cam_idx) + ','  +  str(angle_x) + ','  +  str(angle_y)+ ','  +  str(angle_z) + '\n')
                 print (id_idx +',' + str(expressions[exp_idx]) + ',' + str(cam_idx) + ','  +  str(angle_x) + ','  +  str(angle_y)+ ','  +  str(angle_z))
                 print (i)
-    
+            break
+        break
+    with open('./predef/tmmp/angle_list_%d.txtpkl'% i, 'wb') as handle:
+        pickle.dump(angle_lists, handle, protocol=pickle.HIGHEST_PROTOCOL)
 
 def  get_angle_list():
   
