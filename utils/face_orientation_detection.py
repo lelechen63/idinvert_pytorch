@@ -198,16 +198,18 @@ def  get_angle_list():
 
     for i in range (N):
         angle_lists =  open("./predef/tmmp/angle_list_%d.txt"%i, 'w')
-        threads.append(threading.Thread(target = get_angle_batch(pids[batch * i: batch *(i+1)], i), name ='ggg%d'%i))
-                # angles.append([angle_x, angle_y, angle_z])
-                # if angle_x < 90 and angle_y < 30 and angle_z < 90:
-                #     # print (id_idx +',' + str(expressions[exp_idx]) + ',' + str(cam_idx) )
-                #     gg.write(id_idx +',' + str(expressions[exp_idx]) + ',' + str(cam_idx)   + '\n')
-                # else:
-                #     print (id_idx +',' + str(expressions[exp_idx]) + ',' + str(cam_idx) )
-    for t in threads:
-        print(t)
-        t.start()
+        threading.Thread(target = get_angle_batch(pids[batch * i: batch *(i+1)], i), name ='ggg%d'%i).start()
+
+    #     threads.append(threading.Thread(target = get_angle_batch(pids[batch * i: batch *(i+1)], i), name ='ggg%d'%i))
+    #             # angles.append([angle_x, angle_y, angle_z])
+    #             # if angle_x < 90 and angle_y < 30 and angle_z < 90:
+    #             #     # print (id_idx +',' + str(expressions[exp_idx]) + ',' + str(cam_idx) )
+    #             #     gg.write(id_idx +',' + str(expressions[exp_idx]) + ',' + str(cam_idx)   + '\n')
+    #             # else:
+    #             #     print (id_idx +',' + str(expressions[exp_idx]) + ',' + str(cam_idx) )
+    # for t in threads:
+    #     print(t)
+    #     t.start()
 get_angle_list()
 # get_valid_pickle()
 
