@@ -262,7 +262,7 @@ def main_facescape_render_align(K):
             # img_p = "/raid/celong/FaceScape/fsmview_renderings/1/9_mouth_right/1.png"
             # lmark_path = "/raid/celong/FaceScape/fsmview_landmarks/1/9_mouth_right/1.npy"
             # output_p = "/raid/celong/FaceScape/ffhq_aligned_img/1/9_mouth_right/1_render.png"
-            if id_p +'__' + motion_p not in valid_all.keys:
+            if id_p +'__' + motion_p not in valid_all.keys():
                 print (id_p +'__' + motion_p,'+++++')
                 continue
             
