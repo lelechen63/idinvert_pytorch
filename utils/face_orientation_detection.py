@@ -213,13 +213,17 @@ def  get_angle_list():
   
     pids = os.listdir(image_data_root)
     pids.sort()
-    # gg =  open("./predef/validface_list.txt", 'w')
+    
     N = 50
     batch = int(len(pids) /N)
     threads = []
     total_lists = []
     for i in range (N):
         total_lists.extend(threading.Thread(target = get_angle_batch, args = (pids[batch * i: batch *(i+1)], i)).start())
+    gg =  open("./predef/validface_list.txt", 'w')
+    for line in total_lists:
+        gg.write(line + '\n')
+
 get_angle_list()
 # get_valid_pickle()
 
