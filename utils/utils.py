@@ -218,7 +218,7 @@ def main_facescape_align(K):
                 os.mkdir( save_p2 ) 
             # valid_idxs = valid_all[id_p +'__' + motion_p]
             # for valid_f in valid_idxs:
-            for valid_f in range( len(os.path.listdir(  current_p1  ))):
+            for valid_f in range( len(os.listdir(  current_p1  ))):
                 img_p = os.path.join( current_p1, valid_f + '.jpg')
                 output_p = os.path.join( save_p2 ,valid_f + '.jpg')
                 lmark_p = img_p.replace('fsmview_images', 'fsmview_landmarks')[:-3] +'npy'
@@ -271,7 +271,7 @@ def main_facescape_render_align(K):
             #     continue
             # valid_idxs = valid_all[id_p +'__' + motion_p]
             # for valid_f in valid_idxs:
-            for valid_f in range( len(os.path.listdir(  current_p1  ))):
+            for valid_f in range( len(os.listdir(  current_p1  ))):
                 img_p = os.path.join( current_p1, valid_f + '.png')
                 output_p = os.path.join( save_p2 ,valid_f + '_render.png')
                 # if os.path.exists(output_p):
