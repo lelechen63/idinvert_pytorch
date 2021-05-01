@@ -193,7 +193,7 @@ def  get_angle_list():
     pids.sort()
     # gg =  open("./predef/validface_list.txt", 'w')
     N = 50
-    batch = int(len(pid) /N)
+    batch = int(len(pids) /N)
     threads = []
 
     for i in range (N):
