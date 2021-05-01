@@ -204,27 +204,23 @@ def get_angle_batch(pid_b, i):
             exp_idx = exp_id + 1        
             for cam_idx in range(len(os.listdir(os.path.join( image_data_root , id_idx, expressions[exp_idx]))) -1):
                 angle_x, angle_y, angle_z = get_face_orientation(int(id_idx), exp_idx, cam_idx)
-                angle_lists.append([id_idx +',' + str(expressions[exp_idx]) + ',' + str(cam_idx) + ','  +  str(angle_x) + ','  +  str(angle_y)+ ','  +  str(angle_z)])
-                print (id_idx +',' + str(expressions[exp_idx]) + ',' + str(cam_idx) + ','  +  str(angle_x) + ','  +  str(angle_y)+ ','  +  str(angle_z))
-                print (i)
-                break
-            break
-    return angle_lists
+                angle_lists.write(id_idx +',' + str(expressions[exp_idx]) + ',' + str(cam_idx) + ','  +  str(angle_x) + ','  +  str(angle_y)+ ','  +  str(angle_z) + '\n')
+                # print (id_idx +',' + str(expressions[exp_idx]) + ',' + str(cam_idx) + ','  +  str(angle_x) + ','  +  str(angle_y)+ ','  +  str(angle_z))
+                # print (i)
+    
+
 def  get_angle_list():
   
     pids = os.listdir(image_data_root)
     pids.sort()
-    
+    # gg =  open("./predef/validface_list.txt", 'w')
     N = 50
     batch = int(len(pids) /N)
     threads = []
-    total_lists = []
-    for i in range (N):
-        total_lists.extend(threading.Thread(target = get_angle_batch, args = (pids[batch * i: batch *(i+1)], i)).start())
-    gg =  open("./predef/validface_list.txt", 'w')
-    for line in total_lists:
-        gg.write(line + '\n')
 
+    for i in range (N):
+        # angle_lists =  open("./predef/tmmp/angle_list_%d.txt"%i, 'w')
+        threading.Thread(target = get_angle_batch, args = (pids[batch * i: batch *(i+1)], i)).start()
 get_angle_list()
 # get_valid_pickle()
 
