@@ -9,6 +9,7 @@ import openmesh
 import cv2
 from tqdm import tqdm
 import pickle
+import time, threading
 
 image_data_root = "/raid/celong/FaceScape/fsmview_images"
 landmark_root = "/raid/celong/FaceScape/fsmview_landmarks"
@@ -172,15 +173,9 @@ def get_valid_pickle():
     with open('./predef/validface_list.pkl', 'wb') as handle:
         pickle.dump(front_list, handle, protocol=pickle.HIGHEST_PROTOCOL)
 
-def  get_valid_list():
-  
-    pids = os.listdir(image_data_root)
-    pids.sort()
-    gg =  open("./predef/validface_list.txt", 'w')
-    angle_lists =  open("./predef/angle_list.txt", 'w')
-
-    for id_idx in pids:
-        
+def get_angle_batch(pid_b, i):
+    angle_lists =  open("./predef/tmmp/angle_list_%d.txt"%i, 'w')
+    for id_idx in pid_b:
         for exp_id in range(len(expressions)):
             angles = []
             exp_idx = exp_id + 1        
@@ -188,25 +183,35 @@ def  get_valid_list():
             for cam_idx in range(len(os.listdir(os.path.join( image_data_root , id_idx, expressions[exp_idx]))) -1):
                 angle_x, angle_y, angle_z = get_face_orientation(int(id_idx), exp_idx, cam_idx)
                 angle_lists.write(id_idx +',' + str(expressions[exp_idx]) + ',' + str(cam_idx) + ','  +  str(angle_x) + ','  +  str(angle_y)+ ','  +  str(angle_z) + '\n')
+            
+
+
+
+def  get_angle_list():
+  
+    pids = os.listdir(image_data_root)
+    pids.sort()
+    # gg =  open("./predef/validface_list.txt", 'w')
+    N = 50
+    batch = int(len(pid) /N)
+    threads = []
+
+    for i in range (N):
+        angle_lists =  open("./predef/tmmp/angle_list_%d.txt"%i, 'w')
+        threads.append(threading.Thread(target = get_angle_batch(pids[batch * i: batch *(i+1)], i)))
+
+
+
                 # angles.append([angle_x, angle_y, angle_z])
-                if angle_x < 90 and angle_y < 30 and angle_z < 90:
-                    # print (id_idx +',' + str(expressions[exp_idx]) + ',' + str(cam_idx) )
-                    gg.write(id_idx +',' + str(expressions[exp_idx]) + ',' + str(cam_idx)   + '\n')
-                else:
-                    print (id_idx +',' + str(expressions[exp_idx]) + ',' + str(cam_idx) )
-                # angles.append(angle_x)
-            # angles = np.array(angles)
-            # angle_x_max = angles.max(:,0)
-            # angle_y_max = angles.max(:,1)
-            # angle_z_max = angles.max(:,2)
-
-            # small_index = angle_max.argsort()#[:3]
-            # for kk in small_index:
-            #     print (kk, angles[kk], angle_max[kk])
-            # print (id_idx +',' + str(expressions[exp_idx]) + ',' + str(small_index[0])  )
-            # gg.write(id_idx +',' + str(expressions[exp_idx]) + ',' +str(small_index[0])  + '\n')
-
-get_valid_list()
-get_valid_pickle()
+                # if angle_x < 90 and angle_y < 30 and angle_z < 90:
+                #     # print (id_idx +',' + str(expressions[exp_idx]) + ',' + str(cam_idx) )
+                #     gg.write(id_idx +',' + str(expressions[exp_idx]) + ',' + str(cam_idx)   + '\n')
+                # else:
+                #     print (id_idx +',' + str(expressions[exp_idx]) + ',' + str(cam_idx) )
+    for t in threads:
+        print(t)
+        t.start()
+get_angle_list()
+# get_valid_pickle()
 
 # get_front_list()
