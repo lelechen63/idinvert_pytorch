@@ -156,8 +156,30 @@ def  get_front_list():
     with open('./predef/frontface_list.pkl', 'wb') as handle:
         pickle.dump(front_list, handle, protocol=pickle.HIGHEST_PROTOCOL)
 def get_valid_pickle():
+    angle_lists =  open("./predef/angle_list.txt", 'r')
     gg =  open("./predef/validface_list.txt", 'r')
     front_list = {}
+    total_list = {}
+    while True:
+        line = angle_lists.readline()[:-1]
+        if not line:
+            break
+        tmp = line.split(',')
+        total_list[tmp[0] +'__' + tmp[1] + '__' + tmp[2]] = [float(tmp[3]),float(tmp[4]), float(tmp[5])]
+    print (len(total_list))
+
+    pids = os.listdir(image_data_root)
+    pids.sort()
+    for id_idx in pids:
+        for exp_id in range(len(expressions)):
+            angles = []
+            exp_idx = exp_id + 1
+            for cam_idx in range(len(os.listdir(os.path.join( image_data_root , id_idx, expressions[exp_idx]))) -1):
+                name_key = str(id_idx) +'__' + expressions[exp_idx] +'__' + str(cam_idx)
+                if name_key in total_list.keys():
+                    if 
+                    angles.append([ total_list[name_key][0] ,total_list[name_key][1],total_list[name_key][2]] )
+
     while True:
         line = gg.readline()[:-1]
         if not line:
@@ -179,12 +201,11 @@ def get_angle_batch(pid_b, i):
         for exp_id in range(len(expressions)):
             angles = []
             exp_idx = exp_id + 1        
-            print (os.path.join( image_data_root , id_idx, expressions[exp_idx]))
             for cam_idx in range(len(os.listdir(os.path.join( image_data_root , id_idx, expressions[exp_idx]))) -1):
                 angle_x, angle_y, angle_z = get_face_orientation(int(id_idx), exp_idx, cam_idx)
                 angle_lists.write(id_idx +',' + str(expressions[exp_idx]) + ',' + str(cam_idx) + ','  +  str(angle_x) + ','  +  str(angle_y)+ ','  +  str(angle_z) + '\n')
-            
-
+                print (id_idx +',' + str(expressions[exp_idx]) + ',' + str(cam_idx) + ','  +  str(angle_x) + ','  +  str(angle_y)+ ','  +  str(angle_z))
+                print (i)
 
 
 def  get_angle_list():
@@ -198,19 +219,7 @@ def  get_angle_list():
 
     for i in range (N):
         angle_lists =  open("./predef/tmmp/angle_list_%d.txt"%i, 'w')
-        print ('!!!!!')
         threading.Thread(target = get_angle_batch, args = (pids[batch * i: batch *(i+1)], i)).start()
-        
-    #     threads.append(threading.Thread(target = get_angle_batch(pids[batch * i: batch *(i+1)], i), name ='ggg%d'%i))
-    #             # angles.append([angle_x, angle_y, angle_z])
-    #             # if angle_x < 90 and angle_y < 30 and angle_z < 90:
-    #             #     # print (id_idx +',' + str(expressions[exp_idx]) + ',' + str(cam_idx) )
-    #             #     gg.write(id_idx +',' + str(expressions[exp_idx]) + ',' + str(cam_idx)   + '\n')
-    #             # else:
-    #             #     print (id_idx +',' + str(expressions[exp_idx]) + ',' + str(cam_idx) )
-    # for t in threads:
-    #     print(t)
-    #     t.start()
 get_angle_list()
 # get_valid_pickle()
 
