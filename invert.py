@@ -145,7 +145,9 @@ def main(image_list = None):
   # Invert images.
   logger.info(f'Start inversion.')
   latent_codes = []
-  for img_idx in tqdm(range(len(img_list)), leave=False):
+  for img_idx in tqdm(50), leave=False):
+
+  # for img_idx in tqdm(range(len(img_list)), leave=False):
     image_path = img_list[img_idx]
     image_name = image_path.split('/')[-3] +'__' + image_path.split('/')[-2] + '__' +image_path.split('/')[-1][:-4]
     mask_path = image_path[:-4] +'_mask.png'
