@@ -145,7 +145,7 @@ def main(image_list = None):
   # Invert images.
   logger.info(f'Start inversion.')
   latent_codes = []
-  for img_idx in tqdm(range(50)), leave=False):
+  for img_idx in tqdm(range(50), leave=False):
 
   # for img_idx in tqdm(range(len(img_list)), leave=False):
     image_path = img_list[img_idx]
