@@ -173,7 +173,7 @@ def get_valid_pickle():
         for exp_id in range(len(expressions)):
             
             exp_idx = exp_id + 1
-            valid_list[id_idx +'__' + str(exp_idx)] = []
+            valid_list[id_idx +'__' + expressions[exp_idx]] = []
             for cam_idx in range(len(os.listdir(os.path.join( image_data_root , id_idx, expressions[exp_idx]))) -1):
                 name_key = str(id_idx) +'__' + expressions[exp_idx] +'__' + str(cam_idx)
                 if name_key in total_list.keys():
