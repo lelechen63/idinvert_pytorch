@@ -231,7 +231,7 @@ def get_angle_list_():
         _file = open( './predef/tmmp/angle_list_%d.pkl'%i, "rb")
         valid_all = pickle.load(_file)
         for line in valid_all:
-            angle_list.write(line)
+            angle_lists.write(line)
             
 
 
