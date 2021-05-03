@@ -157,8 +157,7 @@ def  get_front_list():
         pickle.dump(front_list, handle, protocol=pickle.HIGHEST_PROTOCOL)
 def get_valid_pickle():
     angle_lists =  open("./predef/angle_list.txt", 'r')
-    gg =  open("./predef/validface_list.txt", 'r')
-    front_list = {}
+    valid_list = {}
     total_list = {}
     while True:
         line = angle_lists.readline()[:-1]
@@ -172,28 +171,17 @@ def get_valid_pickle():
     pids.sort()
     for id_idx in pids:
         for exp_id in range(len(expressions)):
-            angles = []
+            
             exp_idx = exp_id + 1
+            valid_list[[id_idx +'__' + str(exp_idx)]] = []
             for cam_idx in range(len(os.listdir(os.path.join( image_data_root , id_idx, expressions[exp_idx]))) -1):
                 name_key = str(id_idx) +'__' + expressions[exp_idx] +'__' + str(cam_idx)
                 if name_key in total_list.keys():
-                    # if 
-                    angles.append([ total_list[name_key][0] ,total_list[name_key][1],total_list[name_key][2]] )
+                    if total_list[name_key][0] < 90 and total_list[name_key][1] < 40 and total_list[name_key][2] < 90:
+                        valid_list[[id_idx +'__' + str(exp_idx)]].append(str(cam_idx))
 
-    while True:
-        line = gg.readline()[:-1]
-        if not line:
-            break
-        print(line)
-        tmp = line.split(',')
-        print (tmp)
-        print(tmp[0], tmp[1])
-        if tmp[0] + '__' + tmp[1] not in front_list.keys():
-            front_list[tmp[0] + '__' + tmp[1] ] = [tmp[2]]
-        else:
-            front_list[tmp[0] + '__' + tmp[1] ].append(tmp[2])
     with open('./predef/validface_list.pkl', 'wb') as handle:
-        pickle.dump(front_list, handle, protocol=pickle.HIGHEST_PROTOCOL)
+        pickle.dump(valid_list, handle, protocol=pickle.HIGHEST_PROTOCOL)
 
 def get_angle_batch(pid_b, i):
     # angle_lists =  open("./predef/tmmp/angle_list_%d.txt"% i, 'w')
@@ -241,7 +229,7 @@ def get_angle_list_():
     print (wrong_list)
 
 
-get_angle_list()
-# get_valid_pickle()
+# get_angle_list()
+get_valid_pickle()
 
 # get_front_list()
