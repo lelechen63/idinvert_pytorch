@@ -226,7 +226,7 @@ def  get_angle_list():
         threading.Thread(target = get_angle_batch, args = (pids[batch * i: batch *(i+1)], i)).start()
 def get_angle_list_():
     N = 50
-    angle_lists =  open("./predef/angle_list.txt"%i, 'w')
+    angle_lists =  open("./predef/angle_list.txt", 'w')
     for i in range(N):
         _file = open( './predef/tmmp/angle_list_%d.pkl'%i, "rb")
         valid_all = pickle.load(_file)
