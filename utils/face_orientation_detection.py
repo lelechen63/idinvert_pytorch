@@ -179,7 +179,7 @@ def get_valid_pickle():
                 if name_key in total_list.keys():
                     if total_list[name_key][0] < 90 and total_list[name_key][1] < 40 and total_list[name_key][2] < 90:
                         valid_list[id_idx +'__' + str(exp_idx)].append(str(cam_idx))
-
+    print (len(valid_list))
     with open('./predef/validface_list.pkl', 'wb') as handle:
         pickle.dump(valid_list, handle, protocol=pickle.HIGHEST_PROTOCOL)
 
