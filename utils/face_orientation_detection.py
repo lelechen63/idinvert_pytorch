@@ -166,16 +166,17 @@ def get_valid_pickle():
         tmp = line.split(',')
         total_list[tmp[0] +'__' + tmp[1] + '__' + tmp[2]] = [float(tmp[3]),float(tmp[4]), float(tmp[5])]
     print (len(total_list))
+    kkk = 0
     invalid = []
     pids = os.listdir(image_data_root)
     pids.sort()
     for id_idx in pids:
         for exp_id in range(len(expressions)):
-            
             exp_idx = exp_id + 1
             valid_list[id_idx +'__' + expressions[exp_idx]] = []
             for cam_idx in range(len(os.listdir(os.path.join( image_data_root , id_idx, expressions[exp_idx]))) -1):
                 name_key = str(id_idx) +'__' + expressions[exp_idx] +'__' + str(cam_idx)
+                kkk += 1
                 if name_key in total_list.keys():
                     if total_list[name_key][0] < 90 and total_list[name_key][1] < 40 and total_list[name_key][2] < 90:
                         valid_list[id_idx +'__' +expressions[exp_idx]].append(str(cam_idx))
@@ -183,7 +184,7 @@ def get_valid_pickle():
                         invalid.append(id_idx +'__' +expressions[exp_idx])
 
 
-    print (len(valid_list),len(invalid))
+    print (len(valid_list),len(invalid), kkk)
     with open('./predef/validface_list.pkl', 'wb') as handle:
         pickle.dump(valid_list, handle, protocol=pickle.HIGHEST_PROTOCOL)
 
