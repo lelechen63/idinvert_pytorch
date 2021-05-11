@@ -201,7 +201,7 @@ def  get_angle_list():
         threading.Thread(target = get_angle_batch, args = (pids[batch * i: batch *(i+1)], i)).start()
 def get_angle_list_():
     N = 50
-    angle_lists =  open("./predef/angle_list.txt", 'w')
+    angle_lists =  open("./predef/angle_list2.txt", 'w')
     wrong_list =[]
     for i in range(N):
         try:
@@ -213,8 +213,8 @@ def get_angle_list_():
             wrong_list.append(i)
     print (wrong_list)
 
-get_angle_list()
-# get_angle_list_()
+# get_angle_list()
+get_angle_list_()
 # get_valid_pickle()
 
 # get_front_list()
