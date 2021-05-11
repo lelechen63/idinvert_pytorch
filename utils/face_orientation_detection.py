@@ -10,6 +10,7 @@ import cv2
 from tqdm import tqdm
 import pickle
 import time, threading
+import scipy.spatial.transform
 
 image_data_root = "/raid/celong/FaceScape/fsmview_images"
 landmark_root = "/raid/celong/FaceScape/fsmview_landmarks"
@@ -40,29 +41,13 @@ expressions = {
 
 lm_list_v10 = np.load("./predef/landmark_indices.npz")['v10']
 
-def get_face_orientation(id_idx, exp_idx, cam_idx):
+def get_face_orientation(id_idx, exp_idx, cam_idx, Rt_scale_dict):
     x_dir = np.array([1,0,0]).reshape(3,1)
     y_dir = np.array([0,1,0]).reshape(3,1)
     z_dir = np.array([0,0,1]).reshape(3,1)
 
-    with open("./predef/Rt_scale_dict.json", 'r') as f:
-        Rt_scale_dict = json.load(f)
-        scale = Rt_scale_dict['%d'%id_idx]['%d'%exp_idx][0]
-        Rt_TU = np.array(Rt_scale_dict['%d'%id_idx]['%d'%exp_idx][1])
+    Rt_TU = np.array(Rt_scale_dict['%d'%id_idx]['%d'%exp_idx][1])
 
-    mesh_path = f"{mesh_root}/{id_idx}/models_reg/{expressions[exp_idx]}.obj"
-    if not os.path.exists(mesh_path):
-        print(f"[WARN] {mesh_path} not exist!")
-        exit(0)
-
-    om_mesh = openmesh.read_trimesh(mesh_path)
-    verts = np.array(om_mesh.points())
-    if (verts.shape[0] == 0):
-        print(f"[WARN] {mesh_path} is empty!")
-        exit(0)
-
-    verts = (Rt_TU[:3,:3].T @ (verts - Rt_TU[:3,3]).T).T
-    verts = verts / scale
     x_dir = Rt_TU[:3,:3].T @ x_dir
     y_dir = Rt_TU[:3,:3].T @ y_dir
     z_dir = Rt_TU[:3,:3].T @ z_dir
@@ -72,16 +57,9 @@ def get_face_orientation(id_idx, exp_idx, cam_idx):
     with open(f"{img_dir}/params.json", 'r') as f:
         params = json.load(f)
 
-    K = np.array(params['%d_K' % cam_idx])
     Rt = np.array(params['%d_Rt' % cam_idx])
-    h_src = params['%d_height' % cam_idx]
-    w_src = params['%d_width' % cam_idx]
-    
     R = Rt[:3,:3]
-    T = Rt[:3,3:]
 
-    lmks = verts[lm_list_v10]
-    pos = K @ (R @ lmks.T + T) # (3,68)
     x_dir = R @ x_dir
     y_dir = R @ y_dir
     z_dir = R @ z_dir
@@ -93,8 +71,11 @@ def get_face_orientation(id_idx, exp_idx, cam_idx):
     x_c = np.array([1,0,0]).reshape(3,1)
     y_c = np.array([0,-1,0]).reshape(3,1)
     z_c = np.array([0,0,-1]).reshape(3,1)
-
-    return np.arccos(x_dir.T.dot(x_c)).squeeze() * 180 / np.pi, np.arccos(y_dir.T.dot(y_c)).squeeze() * 180 / np.pi, np.arccos(z_dir.T.dot(z_c)).squeeze() * 180 / np.pi
+    des_axis = np.stack([x_dir, y_dir, z_dir],1).squeeze()
+    src_axis = np.stack([x_c, y_c, z_c],1).squeeze()
+    mat = des_axis @ src_axis.T
+    r = scipy.spatial.transform.Rotation.from_matrix(mat)
+    return r.as_rotvec() * 180 / np.pi
 
 def get_all_folder_example():
     pids = os.listdir(image_data_root)
